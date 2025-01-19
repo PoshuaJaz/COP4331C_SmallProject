@@ -1,22 +1,57 @@
-<html>
+<!DOCTYPE html>
+<html lang="ko">
 <head>
-	<title>COP 4331 LAMP Stack Demo</title>
-	<script type="text/javascript" src="js/md5.js"></script>
-	<script type="text/javascript" src="js/code.js"></script>
-    <link href="css/styles.css" rel="stylesheet">	
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Sort</title>
+    <script type="text/javascript" src="js/md5.js"></script>
+    <script type="text/javascript" src="js/code.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/styles.css">
+	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap" rel="stylesheet">
 </head>
 <body>
+    <div class="container">
+        <div class="left-section">
+            <div id="aboutSection">
+                <h1>Contact Sort</h1>
+                <p>Efficiently organize and manage your contacts with ease!</p>
+            </div>
+        </div>
+        <div class="right-section">
+            <div id="loginSection">
+                <input type="text" id="loginName" placeholder="Username">
+                <br>
+                <input type="password" id="loginPassword" placeholder="Password">
+                <br>
+                <button onclick="doLogin()">Login</button>
+                <div id="loginResult"></div>
+                <p>Not registered? <a href="#" onclick="showRegister()">Create an account</a></p>
+            </div>
 
-<h1 id="title">COP 4331 LAMP Stack Demo</h1>
-
-<div id="loginDiv">
-	<span id="inner-title">PLEASE LOG IN</span>
-	<input type="text" id="loginName" placeholder="Username" /><br />
-	<input type="password" id="loginPassword" placeholder="Password"/><br />
-	<button type="button" id="loginButton" class="buttons" onclick="doLogin();"> Do It </button>
-	<span id="loginResult"></span>
-</div>
-
+            <div id="registerSection" style="display: none;">
+                <form id="registerForm" onsubmit="return doRegister(event)">
+                    <input type="text" id="registerFirstName" name="firstName" placeholder="First Name" required>
+                    <br>
+                    <input type="text" id="registerLastName" name="lastName" placeholder="Last Name" required>
+                    <br>
+                    <input type="text" id="registerUsername" name="username" placeholder="Username" required>
+                    <br>
+                    <input type="password" id="registerPassword" name="password" placeholder="Password" required>
+                    <br>
+                    <input type="password" id="registerConfirmPassword" name="confirmPassword" placeholder="Confirm Password" required>
+                    <br>
+                    <button type="submit">Create</button>
+                </form>
+                <div id="registerResult"></div>
+                <p>Already registered? <a href="#" onclick="showLogin()">Sign In</a></p>
+            </div>
+        </div>
+    </div>
+	<footer>
+		<p>&copy; All Rights Reserved 2025.</p>
+		<p>Email: <a href="mailto:contact@contactsort.com">webdevpeeps@gmail.com</a></p>
+		<p>GitHub: <a href="https://github.com/username" target="_blank">https://github.com/PoshuaJaz/COP4331C_SmallProject</a></p>
+	</footer>
 </body>
 </html>

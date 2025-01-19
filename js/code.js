@@ -1,4 +1,4 @@
-const urlBase = 'http://COP4331-5.com/LAMPAPI';
+const urlBase = 'http://menufish.com/LAMPAPI';
 const extension = 'php';
 
 let userId = 0;
@@ -13,12 +13,12 @@ function doLogin()
 	
 	let login = document.getElementById("loginName").value;
 	let password = document.getElementById("loginPassword").value;
-//	var hash = md5( password );
+	//var hash = md5( password );
 	
 	document.getElementById("loginResult").innerHTML = "";
 
 	let tmp = {login:login,password:password};
-//	var tmp = {login:login,password:hash};
+	//var tmp = {login:login,password:hash};
 	let jsonPayload = JSON.stringify( tmp );
 	
 	let url = urlBase + '/Login.' + extension;
@@ -183,3 +183,21 @@ function searchColor()
 	}
 	
 }
+
+// FOR REGISTER 
+function showRegister() {
+    document.getElementById("loginSection").style.display = "none";
+    document.getElementById("registerSection").style.display = "block";
+}
+
+function showLogin() {
+    document.getElementById("registerSection").style.display = "none";
+    document.getElementById("loginSection").style.display = "block";
+}
+
+function doRegister(event) {
+    // yoni: working 
+}
+
+
+
