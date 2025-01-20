@@ -1,40 +1,76 @@
-<html>
+<!DOCTYPE html>
+<html lang="ko">
 <head>
-	<title>COP 4331 LAMP Stack Demo</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script type="text/javascript" src="js/md5.js"></script>
 	<script type="text/javascript" src="js/code.js"></script>
-    <link href="css/styles.css" rel="stylesheet">	
-    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
-	
-	<script type="text/javascript">
-	document.addEventListener('DOMContentLoaded', function() 
-	{
-		readCookie();
-	}, false);
-	</script>
-	
+	<link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="css/styles.css">
+	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap" rel="stylesheet">
+	<title>Contact Sort</title>
 </head>
 <body>
+	<div class="header">
+		<button class="loginbutton" onclick="doLogout()">Logout</button>
+	</div>
 
-<h1 id="title">COP 4331 LAMP Stack Demo</h1>
+	<div class="control-group">
+		<button class="addButton" onclick="showAddContactPopup()">ADD</button>
+		<div class="search-box">
+			<input type="text" id="searchFirstName" placeholder="First Name">
+			<input type="text" id="searchLastName" placeholder="Last Name">
+			<button onclick="searchContacts()">SEARCH</button>
+		</div>
+	</div>
 
-<div id="loggedInDiv">
-	<span id="userName"></span><br />
-	<button type="button" id="logoutButton" class="buttons" onclick="doLogout();"> Log Out </button>
-</div>
+	<table id="contactTable">
+		<thead>
+			<tr>
+				<th>First Name</th>
+				<th>Last Name</th>
+				<th>Phone</th>
+				<th>Email</th>
+			</tr>
+		</thead>
+		<tbody>
+		</tbody>
+	</table>
 
-<div id="accessUIDiv">
-	<br />
+	<div class="popup" id="addPopup">
+		<h3>Add Contact</h3>
+		<input type="text" id="addFirstName" placeholder="First Name">
+		<input type="text" id="addLastName" placeholder="Last Name">
+		<input type="text" id="addPhone" placeholder="Phone">
+		<input type="text" id="addEmail" placeholder="Email">
+		<div class="popup-buttons">
+		<button onclick="saveNewContact()">Save</button>
+		<button onclick="closeAddPopup()">Cancel</button>
+		</div>
+	</div>
 
-	<input type="text" id="searchText" placeholder="Color To Search For"/>
-	<button type="button" id="searchColorButton" class="buttons" onclick="searchColor();"> Search Color </button><br />
-	<span id="colorSearchResult"></span>
-	<p id="colorList">
-	</p><br /><br />
+	<div class="popup" id="editPopup">
+		<h3>Edit Contact</h3>
+		<input type="text" id="editFirstName" placeholder="First Name">
+		<input type="text" id="editLastName" placeholder="Last Name">
+		<input type="text" id="editPhone" placeholder="Phone">
+		<input type="text" id="editEmail" placeholder="Email">
+		<div class="popup-buttons">
+			<button onclick="saveEdit()">Save</button>
+			<button onclick="closeEditPopup()">Cancel</button>
+		</div>
+	</div>
 
-	<input type="text" id="colorText" placeholder="Color To Add">
-	<button type="button" id="addColorButton" class="buttons" onclick="addColor();"> Add Color </button><br />
-	<span id="colorAddResult"></span>
-</div>
+	<div class="popup" id="deletePopup">
+		<h3>Are you sure you want to delete this contact?</h3>
+		<div class="popup-buttons">
+			<button onclick="closeDeletePopup()">No</button>
+			<button onclick="deleteContact()">Yes</button>
+		</div>
+	</div>
 
+	<div class="overlay" id="overlay"></div>
+	<footer>
+		<p>&copy; All Rights Reserved 2025.</p>
 </body>
 </html>

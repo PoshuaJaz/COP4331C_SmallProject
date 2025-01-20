@@ -185,19 +185,58 @@ function searchColor()
 }
 
 // FOR REGISTER 
-function showRegister() {
-    document.getElementById("loginSection").style.display = "none";
-    document.getElementById("registerSection").style.display = "block";
-}
-
 function showLogin() {
     document.getElementById("registerSection").style.display = "none";
     document.getElementById("loginSection").style.display = "block";
 }
 
-function doRegister(event) {
-    // yoni: working 
+function showRegister() {
+    document.getElementById("loginSection").style.display = "none";
+    document.getElementById("registerSection").style.display = "block";
 }
 
+function saveRegister(event) {
+    // Yoni: working (~1/25/25)
+}
 
+function searchContacts() {
+	// Yoni: working (~1/25/25)
+}
 
+function showAddContactPopup() {
+	document.getElementById('addPopup').style.display = 'block';
+	document.getElementById('overlay').style.display = 'block';
+}
+
+function closeAddPopup() {
+	document.getElementById('addPopup').style.display = 'none';
+	document.getElementById('overlay').style.display = 'none';
+}
+
+function saveNewContact() {
+	// Josh
+}
+
+function showEditPopup(index) {
+	// TBD
+}
+
+function closeEditPopup() {
+	document.getElementById('editPopup').style.display = 'none';
+	document.getElementById('overlay').style.display = 'none';
+}
+	
+function saveEdit() {
+  console.log("saveEdit");
+  closeEditPopup();
+}
+
+function closeDeletePopup() {
+	document.getElementById('deletePopup').style.display = 'none';
+	document.getElementById('overlay').style.display = 'none';
+}
+	
+function deleteContact() {
+	// TBD
+}
+	
