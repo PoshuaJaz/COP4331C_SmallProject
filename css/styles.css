@@ -1,5 +1,3 @@
-/* index.html */
-
 body {
     margin: 0;
     font-family: 'Ubuntu', sans-serif;
@@ -27,17 +25,6 @@ body {
 .left-section {
     background-color: #b6d2ec6e; 
     text-align: center;
-}
-
-#aboutSection h1 {
-    font-size: 3rem;
-    margin-bottom: 10px;
-    color: #333;
-}
-
-#aboutSection p {
-    font-size: 1.2rem;
-    color: #555;
 }
 
 .right-section {
@@ -80,15 +67,6 @@ body {
     color: #333;
 }
 
-#loginSection a, #registerSection a {
-    color: #007BFF;
-    text-decoration: none;
-}
-
-#loginSection a:hover, #registerSection a:hover {
-    text-decoration: underline;
-}
-
 footer {
     background-color: #333333;
     color: white;
@@ -115,20 +93,120 @@ footer a:hover {
     text-decoration: underline;
 }
 
-/* color.html */
-table {
-    width: 100%;
-    margin-top: 20px;
-    border-collapse: collapse;
-    }
+.header {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #b6d2ec6e;
+}
 
-    th, td {
+.loginbutton {
+    background-color: #fff; 
+    color: #000000; 
+    font-size: 1rem;
+    font-weight: bold;
+    padding: 8px 16px;
+    border: 2px  #000000; 
+    border-radius: 20px; 
+    cursor: pointer; 
+    transition: all 0.3s ease;
+}
+
+.loginbutton:hover {
+    background-color: #000000; 
+    color: #fff; 
+}
+
+.control-group {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 15px;
+    padding: 15px;
+    margin-top: 150px;
+    background-color: #f9f9f9;
+    margin-left: 750px;
+}
+
+.addButton, .searchButton {
+    display: inline-flex;
+    align-items: center;
+    font-size: 0.8rem;
+    font-weight: bold;
+    padding: 5px 10px;
+    border: 1.5px solid #000;
+    border-radius: 15px;
+    background-color: #fff;
+    color: #000;
+    cursor: pointer;
+    gap: 3px;
+    transition: all 0.3s ease;
+}
+
+.addButton:hover, .searchButton:hover {
+    background-color: #000;
+    color: #fff;
+}
+
+.addButton::before {
+    content: '+';
+    font-size: 1rem;
+}
+
+.search-box {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.search-box input {
+    padding: 5px;
+    font-size: 0.8rem;
     border: 1px solid #ccc;
-    padding: 10px;
-    text-align: left;
-    }
+    border-radius: 15px;
+    width: 120px;
+}
 
-    .popup {
+#contactTable {
+    width: 80%;
+    border-collapse: collapse;
+    margin: 20px auto;
+    font-size: 1rem;
+    font-family: 'Arial', sans-serif;
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+#contactTable thead tr {
+    background: #d6d6d5;
+    color: #000000;
+    text-align: left;
+}
+
+#contactTable thead th {
+    padding: 12px 15px;
+}
+
+#contactTable tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+#contactTable tbody tr:nth-of-type(even) {
+    background: #f3f3f3;
+}
+
+#contactTable tbody td {
+    padding: 12px 15px;
+}
+
+#contactTable tbody tr:hover {
+    background: #d1e7fd;
+    color: #333;
+    transition: all 0.3s ease;
+}
+
+.popup {
     display: none;
     position: fixed;
     top: 50%;
@@ -139,26 +217,26 @@ table {
     border-radius: 5px;
     padding: 20px;
     z-index: 1000;
-    }
+}
 
-    .popup input {
+.popup input {
     display: block;
     width: calc(100% - 20px);
     margin: 10px 0;
     padding: 5px;
-    }
+}
 
-    .popup-buttons {
+.popup-buttons {
     display: flex;
     justify-content: flex-end;
-    }
+}
 
-    .popup-buttons button {
+.popup-buttons button {
     margin-left: 10px;
     padding: 5px 15px;
-    }
+}
 
-    .overlay {
+.overlay {
     display: none;
     position: fixed;
     top: 0;
@@ -167,4 +245,70 @@ table {
     height: 100%;
     background: rgba(0, 0, 0, 0.5);
     z-index: 999;
-    }
+}
+
+.popup.addpopup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #ffffff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    width: 100%;
+    max-width: 400px;
+}
+
+.popup.addpopup h2 {
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.popup.addpopup input {
+    display: block;
+    width: calc(100% - 20px);
+    margin: 10px 0;
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.popup-buttons {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+}
+
+.popup-buttons button {
+    padding: 10px 20px;
+    margin-left: 10px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.popup-buttons .btn-save {
+    background-color: #007BFF;
+    color: #fff;
+}
+
+.popup-buttons .btn-save:hover {
+    background-color: #0056b3;
+}
+
+.popup-buttons .btn-cancel {
+    background-color: #ccc;
+    color: #333;
+}
+
+.popup-buttons .btn-cancel:hover {
+    background-color: #bbb;
+}

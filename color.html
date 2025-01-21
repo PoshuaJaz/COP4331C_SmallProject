@@ -20,7 +20,7 @@
 		<div class="search-box">
 			<input type="text" id="searchFirstName" placeholder="First Name">
 			<input type="text" id="searchLastName" placeholder="Last Name">
-			<button onclick="searchContacts()">SEARCH</button>
+			<button class="searchButton" onclick="searchContacts()">SEARCH</button>
 		</div>
 	</div>
 
@@ -34,31 +34,47 @@
 			</tr>
 		</thead>
 		<tbody>
+			<tr>
+				<td>test</td>
+				<td>test</td>
+				<td>test</td>
+				<td>test</td>
+			</tr>
+			<tr>
+				<td>test</td>
+				<td>test</td>
+				<td>test</td>
+				<td>test</td>
+			</tr>
 		</tbody>
 	</table>
 
-	<div class="popup" id="addPopup">
+	<div class="popup addpopup" id="addPopup">
 		<h3>Add Contact</h3>
-		<input type="text" id="addFirstName" placeholder="First Name">
-		<input type="text" id="addLastName" placeholder="Last Name">
-		<input type="text" id="addPhone" placeholder="Phone">
-		<input type="text" id="addEmail" placeholder="Email">
-		<div class="popup-buttons">
-		<button onclick="saveNewContact()">Save</button>
-		<button onclick="closeAddPopup()">Cancel</button>
-		</div>
+		<form id="addContactForm" onsubmit="saveNewContact(event)">
+			<input type="text" id="contactFirstName" name="firstName" placeholder="First Name" required>
+			<input type="text" id="contactLastName" name="lastName" placeholder="Last Name" required>
+			<input type="text" id="contactPhone" name="phone" placeholder="Phone Number" required>
+			<input type="email" id="contactEmail" name="email" placeholder="Email" required>
+			<div class="popup-buttons">
+				<button type="button" class="btn-cancel" onclick="closeAddPopup()">취소</button>
+				<button type="submit" class="btn-save">저장</button>
+			</div>
+		</form>
 	</div>
 
-	<div class="popup" id="editPopup">
+	<div class="popup addpopup" id="editPopup">
 		<h3>Edit Contact</h3>
-		<input type="text" id="editFirstName" placeholder="First Name">
-		<input type="text" id="editLastName" placeholder="Last Name">
-		<input type="text" id="editPhone" placeholder="Phone">
-		<input type="text" id="editEmail" placeholder="Email">
-		<div class="popup-buttons">
-			<button onclick="saveEdit()">Save</button>
-			<button onclick="closeEditPopup()">Cancel</button>
-		</div>
+		<form id="editContactForm" onsubmit="saveEdit(event)">
+			<input type="text" id="editFirstName" name="firstName" placeholder="First Name" required>
+			<input type="text" id="editLastName" name="lastName" placeholder="Last Name" required>
+			<input type="text" id="editPhone" name="phone" placeholder="Phone" required>
+			<input type="email" id="editEmail" name="email" placeholder="Email" required>
+			<div class="popup-buttons">
+				<button type="button" class="btn-cancel" onclick="closeEditPopup()">Cancel</button>
+				<button type="submit" class="btn-save">Save</button>
+			</div>
+		</form>
 	</div>
 
 	<div class="popup" id="deletePopup">
