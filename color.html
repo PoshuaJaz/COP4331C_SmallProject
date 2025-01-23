@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<html lang="ko">
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,10 +8,18 @@
 	<link rel="stylesheet" type="text/css" href="css/styles.css">
 	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap" rel="stylesheet">
 	<title>Contact Sort</title>
+	<script type="text/javascript">
+		document.addEventListener('DOMContentLoaded', function() 
+		{
+			readCookie();
+			showAllContacts();
+		}, false);
+		</script>
 </head>
 <body>
 	<div class="header">
 		<button class="loginbutton" onclick="doLogout()">Logout</button>
+		<span id="userName"></span>
 	</div>
 
 	<div class="control-group">
@@ -23,7 +30,7 @@
 			<button class="searchButton" onclick="searchContacts()">SEARCH</button>
 		</div>
 	</div>
-
+	<div id="messageBox" style="color: rgb(10, 105, 228); margin: 10px 0;"></div>
 	<table id="contactTable">
 		<thead>
 			<tr>
@@ -57,8 +64,8 @@
 			<input type="text" id="contactPhone" name="phone" placeholder="Phone Number" required>
 			<input type="email" id="contactEmail" name="email" placeholder="Email" required>
 			<div class="popup-buttons">
-				<button type="button" class="btn-cancel" onclick="closeAddPopup()">취소</button>
-				<button type="submit" class="btn-save">저장</button>
+				<button type="button" class="btn-cancel" onclick="closeAddPopup()">Cancel</button>
+				<button type="submit" class="btn-save">Save</button>
 			</div>
 		</form>
 	</div>
@@ -90,3 +97,5 @@
 		<p>&copy; All Rights Reserved 2025.</p>
 </body>
 </html>
+
+

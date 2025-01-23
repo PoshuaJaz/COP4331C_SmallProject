@@ -13,12 +13,13 @@ function doLogin()
 	
 	let login = document.getElementById("loginName").value;
 	let password = document.getElementById("loginPassword").value;
-	//var hash = md5( password );
+	
+	var hash = md5( password );
 	
 	document.getElementById("loginResult").innerHTML = "";
 
-	let tmp = {login:login,password:password};
-	//var tmp = {login:login,password:hash};
+	//let tmp = {login:login,password:password};
+	var tmp = {login:login,password:hash};
 	let jsonPayload = JSON.stringify( tmp );
 	
 	let url = urlBase + '/Login.' + extension;
@@ -185,24 +186,172 @@ function searchColor()
 }
 
 // FOR REGISTER 
-function showLogin() {
-    document.getElementById("registerSection").style.display = "none";
-    document.getElementById("loginSection").style.display = "block";
-}
-
 function showRegister() {
     document.getElementById("loginSection").style.display = "none";
     document.getElementById("registerSection").style.display = "block";
 }
 
+function showLogin() {
+    document.getElementById("registerSection").style.display = "none";
+    document.getElementById("loginSection").style.display = "block";
+}
+
+// yoni function: done 
+// need to implement restrictions for the username and password ??
 function saveRegister(event) {
-    // Yoni: working (~1/25/25)
+    event.preventDefault();
+
+    let firstName = document.getElementById("registerFirstName").value.trim();
+    let lastName = document.getElementById("registerLastName").value.trim();
+    let username = document.getElementById("registerUsername").value.trim();
+    let password = document.getElementById("registerPassword").value.trim();
+    let confirmPassword = document.getElementById("registerConfirmPassword").value.trim();
+    let registerResult = document.getElementById("registerResult");
+
+    // passwordconfirm 
+    if (password !== confirmPassword) {
+        registerResult.textContent = "Passwords do not match.";
+        registerResult.style.color = "red";
+        return;
+    }
+
+    // password hash
+    let hashPassword = md5(password);
+
+    // send data to server
+    let tmp = {
+        FirstName: firstName,
+        LastName: lastName,
+        Login: username,
+        Password: hashPassword
+    };
+
+    let jsonPayload = JSON.stringify(tmp);
+
+    let url = urlBase + '/Register.' + extension;
+
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST", url, true);
+    xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+                let response = JSON.parse(xhr.responseText);
+
+                if (response.error) {
+                    registerResult.textContent = response.error;
+                    registerResult.style.color = "red";
+                } else {
+                    registerResult.textContent = "Registration successful! Please log in.";
+                    showLogin();
+                }
+            } else {
+                registerResult.textContent = `Error: ${xhr.status} - ${xhr.statusText}`;
+                registerResult.style.color = "red";
+            }
+        }
+    };
+
+    xhr.send(jsonPayload);
 }
 
+// FOR SEARCH
+// yoni working 
+function showAllContacts() {
+	let contactTableBody = document.querySelector("#contactTable tbody");
+	let messageBox = document.getElementById("messageBox");
+
+    contactTableBody.innerHTML = "";
+	messageBox.textContent = "";
+
+	// send data to server
+	let tmp = { userId: userId }; 
+	let jsonPayload = JSON.stringify(tmp);
+    let url = urlBase + '/SearchContacts.' + extension;
+
+	let xhr = new XMLHttpRequest();
+	xhr.open("POST", url, true);
+    xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+	
+	xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200)
+		{	
+			let response = JSON.parse(xhr.responseText);
+
+            if (response.error) {
+                messageBox.textContent = "Error: " + response.error; 
+            } else {
+				response.results.forEach(contact => {
+					let row = document.createElement("tr");
+					row.innerHTML = `
+						<td>${contact.firstName}</td>
+						<td>${contact.lastName}</td>
+						<td>${contact.phone}</td>
+						<td>${contact.email}</td>
+					`;
+					contactTableBody.appendChild(row);
+				});
+			}
+        }
+    };
+
+    xhr.send(jsonPayload);
+}
+
+// yoni - working 
 function searchContacts() {
-	// Yoni: working (~1/25/25)
+    let firstNameSearch = document.getElementById("searchFirstName").value.trim();
+    let lastNameSearch = document.getElementById("searchLastName").value.trim();
+    let contactTableBody = document.querySelector("#contactTable tbody");
+	let messageBox = document.getElementById("messageBox");
+
+	contactTableBody.innerHTML = "";
+    messageBox.textContent = "";
+
+	if (!firstNameSearch && !lastNameSearch) {
+		document.getElementById("messageBox").innerText = "Please enter a first name or last name to search.";
+		return;
+	}
+
+    // send data to server
+    let tmp = {
+        FirstName: firstNameSearch,
+        LastName: lastNameSearch,
+        userID: userId
+    };
+    let jsonPayload = JSON.stringify(tmp);
+    let url = urlBase + '/SearchContacts.' + extension;
+	
+	let xhr = new XMLHttpRequest();
+	xhr.open("POST", url, true);
+    xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+
+	xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            let response = JSON.parse(xhr.responseText);
+
+            if (response.error) {
+                messageBox.textContent = "Error: " + response.error;
+            } else {
+                response.results.forEach(contact => {
+                    let row = document.createElement("tr");
+                    row.innerHTML = `
+                        <td>${contact.FirstName}</td>
+                        <td>${contact.LastName}</td>
+                        <td>${contact.Phone}</td>
+                        <td>${contact.Email}</td>
+                    `;
+                    contactTableBody.appendChild(row);
+                });
+            }
+        }
+    };
+
+    xhr.send(jsonPayload);
 }
 
+// FOR ADD
 function showAddContactPopup() {
 	document.getElementById('addPopup').style.display = 'block';
 	document.getElementById('overlay').style.display = 'block';
@@ -217,6 +366,7 @@ function saveNewContact() {
 	// Josh
 }
 
+// FOR EDIT
 function showEditPopup(index) {
 	// TBD
 }
@@ -231,6 +381,7 @@ function saveEdit() {
   closeEditPopup();
 }
 
+// FOR DELETE
 function closeDeletePopup() {
 	document.getElementById('deletePopup').style.display = 'none';
 	document.getElementById('overlay').style.display = 'none';
@@ -239,4 +390,4 @@ function closeDeletePopup() {
 function deleteContact() {
 	// TBD
 }
-	
+
