@@ -12,7 +12,7 @@
 	} 
 	else
 	{
-		$stmt = $conn->prepare("select FirstName,LastName from Contacts where FirstName like ? and LastName like ? and UserID=?");
+		$stmt = $conn->prepare("select ID,FirstName,LastName,Phone,Email from Contacts where FirstName like ? and LastName like ? and UserID=?");
 		$contactFirstName = "%" . $inData["FirstName"] . "%";
 		$contactLastName = "%" . $inData["LastName"] . "%";
 		$stmt->bind_param("sss", $contactFirstName, $contactLastName, $inData["userID"]);
@@ -27,7 +27,7 @@
 				$searchResults .= ",";
 			}
 			$searchCount++;
-			$searchResults .= '"' . $row["FirstName"] . " " . $row["LastName"] . '"';
+			$searchResults .= '{"FirstName" : "' . $row["FirstName"] . '", "LastName" : "' . $row["LastName"] . '", "Phone" : "' . $row["Phone"] . '", "Email" : "' . $row["Email"] . '", "ID" : "' . $row["ID"] . '"}';
 		}
 		
 		if( $searchCount == 0 )
