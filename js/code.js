@@ -109,96 +109,25 @@ function doLogout()
 	window.location.href = "index.html";
 }
 
-function addColor()
+// for register section
+function showRegister() 
 {
-	let newColor = document.getElementById("colorText").value;
-	document.getElementById("colorAddResult").innerHTML = "";
-
-	let tmp = {color:newColor,userId,userId};
-	let jsonPayload = JSON.stringify( tmp );
-
-	let url = urlBase + '/AddColor.' + extension;
-	
-	let xhr = new XMLHttpRequest();
-	xhr.open("POST", url, true);
-	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
-	try
-	{
-		xhr.onreadystatechange = function() 
-		{
-			if (this.readyState == 4 && this.status == 200) 
-			{
-				document.getElementById("colorAddResult").innerHTML = "Color has been added";
-			}
-		};
-		xhr.send(jsonPayload);
-	}
-	catch(err)
-	{
-		document.getElementById("colorAddResult").innerHTML = err.message;
-	}
-	
-}
-
-function searchColor()
-{
-	let srch = document.getElementById("searchText").value;
-	document.getElementById("colorSearchResult").innerHTML = "";
-	
-	let colorList = "";
-
-	let tmp = {search:srch,userId:userId};
-	let jsonPayload = JSON.stringify( tmp );
-
-	let url = urlBase + '/SearchColors.' + extension;
-	
-	let xhr = new XMLHttpRequest();
-	xhr.open("POST", url, true);
-	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
-	try
-	{
-		xhr.onreadystatechange = function() 
-		{
-			if (this.readyState == 4 && this.status == 200) 
-			{
-				document.getElementById("colorSearchResult").innerHTML = "Color(s) has been retrieved";
-				let jsonObject = JSON.parse( xhr.responseText );
-				
-				for( let i=0; i<jsonObject.results.length; i++ )
-				{
-					colorList += jsonObject.results[i];
-					if( i < jsonObject.results.length - 1 )
-					{
-						colorList += "<br />\r\n";
-					}
-				}
-				
-				document.getElementsByTagName("p")[0].innerHTML = colorList;
-			}
-		};
-		xhr.send(jsonPayload);
-	}
-	catch(err)
-	{
-		document.getElementById("colorSearchResult").innerHTML = err.message;
-	}
-	
-}
-
-// FOR REGISTER 
-function showRegister() {
     document.getElementById("loginSection").style.display = "none";
     document.getElementById("registerSection").style.display = "block";
 }
 
-function showLogin() {
+// Show login section 
+function showLogin() 
+{
     document.getElementById("registerSection").style.display = "none";
     document.getElementById("loginSection").style.display = "block";
 }
 
-// yoni function: done 
-// need to implement restrictions for the username and password ??
-function saveRegister(event) {
+// YONI
+// Register Fucntion 
+// Note: need to implement restrictions for the username and password
+function saveRegister(event) 
+{
     event.preventDefault();
 
     let firstName = document.getElementById("registerFirstName").value.trim();
@@ -256,94 +185,95 @@ function saveRegister(event) {
     xhr.send(jsonPayload);
 }
 
-// FOR SEARCH
-// yoni working 
-function showAllContacts() {
-	let contactTableBody = document.querySelector("#contactTable tbody");
-	let messageBox = document.getElementById("messageBox");
-
-    contactTableBody.innerHTML = "";
-	messageBox.textContent = "";
-
-	// send data to server
-	let tmp = { userId: userId }; 
-	let jsonPayload = JSON.stringify(tmp);
-    let url = urlBase + '/SearchContacts.' + extension;
-
-	let xhr = new XMLHttpRequest();
-	xhr.open("POST", url, true);
-    xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
-	
-	xhr.onreadystatechange = function () {
-        if (xhr.readyState === 4 && xhr.status === 200)
-		{	
-			let response = JSON.parse(xhr.responseText);
-
-            if (response.error) {
-                messageBox.textContent = "Error: " + response.error; 
-            } else {
-				response.results.forEach(contact => {
-					let row = document.createElement("tr");
-					row.innerHTML = `
-						<td>${contact.firstName}</td>
-						<td>${contact.lastName}</td>
-						<td>${contact.phone}</td>
-						<td>${contact.email}</td>
-					`;
-					contactTableBody.appendChild(row);
-				});
-			}
-        }
-    };
-
-    xhr.send(jsonPayload);
+// Show pop-up for add contact 
+function showAddContactPopup() 
+{
+	document.getElementById('addPopup').style.display = 'block';
+	document.getElementById('overlay').style.display = 'block';
 }
 
-// yoni - working 
-function searchContacts() {
+// Close pop-up for add contact 
+function closeAddPopup() 
+{
+	document.getElementById('addPopup').style.display = 'none';
+	document.getElementById('overlay').style.display = 'none';
+}
+
+function saveNewContact() 
+{
+	// Josh
+}
+
+
+// Search contact depening user id 
+function searchContacts() 
+{
     let firstNameSearch = document.getElementById("searchFirstName").value.trim();
     let lastNameSearch = document.getElementById("searchLastName").value.trim();
     let contactTableBody = document.querySelector("#contactTable tbody");
-	let messageBox = document.getElementById("messageBox");
+    let messageBox = document.getElementById("messageBox");
 
-	contactTableBody.innerHTML = "";
+    contactTableBody.innerHTML = "";
     messageBox.textContent = "";
 
-	if (!firstNameSearch && !lastNameSearch) {
-		document.getElementById("messageBox").innerText = "Please enter a first name or last name to search.";
-		return;
-	}
+    if (!firstNameSearch && !lastNameSearch) {
+        messageBox.innerText = "Please enter a first name or last name to search.";
+        addEmptyRows(15);
+        return;
+    }
 
     // send data to server
     let tmp = {
         FirstName: firstNameSearch,
         LastName: lastNameSearch,
-        userID: userId
+        userID: userId 
     };
+
     let jsonPayload = JSON.stringify(tmp);
     let url = urlBase + '/SearchContacts.' + extension;
-	
-	let xhr = new XMLHttpRequest();
-	xhr.open("POST", url, true);
+
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST", url, true);
     xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
 
-	xhr.onreadystatechange = function () {
-        if (xhr.readyState === 4 && xhr.status === 200) {
-            let response = JSON.parse(xhr.responseText);
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+                let response = JSON.parse(xhr.responseText);
+                if (response.error) {
+                    messageBox.textContent = "Error: " + response.error;
+                    addEmptyRows(15);
+                } else if (response.results && response.results.length > 0) {
+                    response.results.forEach((contact,index) => {
+                        let row = document.createElement("tr");
+						row.setAttribute("data-id", contact.ID);
+                        row.innerHTML = `
+                            <td>${contact.FirstName}</td>
+                            <td>${contact.LastName}</td>
+                            <td>${contact.Phone}</td>
+                            <td>${contact.Email}</td>
+                            <td>
+                                <div>
+                                    <button class="editing-icon" onclick="showEditPopup(${index})"> Edit </button>
+                                    <button class="delete-icon" onclick="deleteContact(${index})"> Delete </button>
+                                </div>
+                            </td>
+                        `;
+                        contactTableBody.appendChild(row);
+                    });
 
-            if (response.error) {
-                messageBox.textContent = "Error: " + response.error;
+                    let emptyRowCount = 15 - response.results.length;
+                    if (emptyRowCount > 0) {
+                        addEmptyRows(emptyRowCount);
+                    }
+
+                } else {
+                    messageBox.textContent = "No records found.";
+                    addEmptyRows(15);
+                }
             } else {
-                response.results.forEach(contact => {
-                    let row = document.createElement("tr");
-                    row.innerHTML = `
-                        <td>${contact.FirstName}</td>
-                        <td>${contact.LastName}</td>
-                        <td>${contact.Phone}</td>
-                        <td>${contact.Email}</td>
-                    `;
-                    contactTableBody.appendChild(row);
-                });
+                messageBox.textContent = "Error: Unable to connect to server.";
+                addEmptyRows(15);
             }
         }
     };
@@ -351,43 +281,84 @@ function searchContacts() {
     xhr.send(jsonPayload);
 }
 
-// FOR ADD
-function showAddContactPopup() {
-	document.getElementById('addPopup').style.display = 'block';
-	document.getElementById('overlay').style.display = 'block';
+// Show popup for edit contact 
+// To implement the popup so that it displays the existing contact data
+function showEditPopup(index) 
+{
+
 }
 
-function closeAddPopup() {
-	document.getElementById('addPopup').style.display = 'none';
-	document.getElementById('overlay').style.display = 'none';
-}
-
-function saveNewContact() {
-	// Josh
-}
-
-// FOR EDIT
-function showEditPopup(index) {
-	// TBD
-}
-
-function closeEditPopup() {
+function closeEditPopup() 
+{
 	document.getElementById('editPopup').style.display = 'none';
 	document.getElementById('overlay').style.display = 'none';
 }
-	
-function saveEdit() {
-  console.log("saveEdit");
-  closeEditPopup();
+
+
+// Edit contact 
+// To save the changes to the server
+function saveEdit(event) 
+{
+
 }
 
-// FOR DELETE
-function closeDeletePopup() {
-	document.getElementById('deletePopup').style.display = 'none';
-	document.getElementById('overlay').style.display = 'none';
-}
-	
-function deleteContact() {
-	// TBD
+function deleteContact(index) 
+{
+	const contactRow = document.querySelector(`#contactTable tbody tr[data-id="${index}"]`);
+	const messageBox = document.getElementById("messageBox");
+
+	messageBox.textContent = "";
+
+	const contactID = index;
+
+    const jsonPayload = JSON.stringify({ contactID: contactID });
+    const url = urlBase + '/DeleteContact.' + extension;
+
+	let xhr = new XMLHttpRequest();
+    xhr.open("POST", url, true);
+    xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+
+	xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+                let response = JSON.parse(xhr.responseText);
+
+                if (response.error) {
+                    messageBox.textContent = "Error: " + response.error;
+                } else {
+                    contactRow.remove();
+                }
+            } else {
+                messageBox.textContent = "Error: Unable to delete the contact.";
+            }
+        }
+    };
+
+    xhr.send(jsonPayload);
 }
 
+document.addEventListener("click", (event) => {
+    if (!event.target.matches(".ellipsis-icon") && !event.target.closest(".action-buttons")) {
+        document.querySelectorAll(".action-buttons").forEach(popup => {
+            popup.style.display = "none";
+        });
+    }
+});
+
+function addEmptyRows(count) {
+    let contactTableBody = document.querySelector("#contactTable tbody");
+
+    for (let i = 0; i < count; i++) {
+        let row = document.createElement("tr");
+        row.innerHTML = `
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        `;
+        contactTableBody.appendChild(row);
+    }
+}

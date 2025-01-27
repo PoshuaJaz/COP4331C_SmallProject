@@ -11,8 +11,8 @@
 	<script type="text/javascript">
 		document.addEventListener('DOMContentLoaded', function() 
 		{
+			addEmptyRows(15);
 			readCookie();
-			showAllContacts();
 		}, false);
 		</script>
 </head>
@@ -38,21 +38,11 @@
 				<th>Last Name</th>
 				<th>Phone</th>
 				<th>Email</th>
+				<th></th>
 			</tr>
 		</thead>
 		<tbody>
-			<tr>
-				<td>test</td>
-				<td>test</td>
-				<td>test</td>
-				<td>test</td>
-			</tr>
-			<tr>
-				<td>test</td>
-				<td>test</td>
-				<td>test</td>
-				<td>test</td>
-			</tr>
+			
 		</tbody>
 	</table>
 
@@ -64,38 +54,38 @@
 			<input type="text" id="contactPhone" name="phone" placeholder="Phone Number" required>
 			<input type="email" id="contactEmail" name="email" placeholder="Email" required>
 			<div class="popup-buttons">
-				<button type="button" class="btn-cancel" onclick="closeAddPopup()">Cancel</button>
-				<button type="submit" class="btn-save">Save</button>
-			</div>
-		</form>
-	</div>
-
-	<div class="popup addpopup" id="editPopup">
-		<h3>Edit Contact</h3>
-		<form id="editContactForm" onsubmit="saveEdit(event)">
-			<input type="text" id="editFirstName" name="firstName" placeholder="First Name" required>
-			<input type="text" id="editLastName" name="lastName" placeholder="Last Name" required>
-			<input type="text" id="editPhone" name="phone" placeholder="Phone" required>
-			<input type="email" id="editEmail" name="email" placeholder="Email" required>
-			<div class="popup-buttons">
 				<button type="button" class="btn-cancel" onclick="closeEditPopup()">Cancel</button>
 				<button type="submit" class="btn-save">Save</button>
 			</div>
 		</form>
 	</div>
 
-	<div class="popup" id="deletePopup">
-		<h3>Are you sure you want to delete this contact?</h3>
-		<div class="popup-buttons">
-			<button onclick="closeDeletePopup()">No</button>
-			<button onclick="deleteContact()">Yes</button>
-		</div>
+	<div class="popup editPopup" id="editPopup" data-id="">
+		<h3>Edit Contact</h3>
+		<form id="editContactForm" onsubmit="saveEdit(event)">
+			<label for="dropdown">Choose a field to edit:</label>
+			<select id="dropdown" name="options" required>
+				<option value="" disabled selected>Select a field</option>
+				<option value="FirstName">First Name</option>
+				<option value="LastName">Last Name</option>
+				<option value="Phone">Phone</option>
+				<option value="Email">Email</option>
+			</select>
+	
+			<input type="text" id="editValue" name="value" placeholder="Enter new value" required>
+			
+			<div class="popup-buttons">
+				<button type="button" class="btn-cancel" onclick="closeEditPopup()">Cancel</button>
+				<button type="submit" class="btn-save">Save</button>
+			</div>
+		</form>
 	</div>
-
+	
 	<div class="overlay" id="overlay"></div>
 	<footer>
 		<p>&copy; All Rights Reserved 2025.</p>
 </body>
 </html>
+
 
 
