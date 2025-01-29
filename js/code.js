@@ -366,37 +366,7 @@ function searchContacts()
 // To implement the popup so that it displays the existing contact data
 function showEditPopup(index) 
 {
-    const contactRow = document.querySelectorAll("#contactTable tbody tr")[index];
 
-    let contactId = contactRow.getAttribute("data-id");
-	let firstName = contactRow.children[0].textContent.trim();
-    let lastName = contactRow.children[1].textContent.trim();
-    let phone = contactRow.children[2].textContent.trim();
-    let email = contactRow.children[3].textContent.trim();
-
-    document.getElementById("editPopup").setAttribute("data-id", contactId);
-	document.getElementById("dropdown").value = "FirstName";
-	document.getElementById("editValue").value = firstName;
-
-	document.getElementById("dropdown").addEventListener("change", function () {
-        const selectedField = this.value;
-        let valueToEdit = "";
-
-        if (selectedField === "FirstName") {
-            valueToEdit = firstName;
-        } else if (selectedField === "LastName") {
-            valueToEdit = lastName;
-        } else if (selectedField === "Phone") {
-            valueToEdit = phone;
-        } else if (selectedField === "Email") {
-            valueToEdit = email;
-        }
-
-        document.getElementById("editValue").value = valueToEdit;
-    });
-
-    document.getElementById("editPopup").style.display = "block";
-    document.getElementById("overlay").style.display = "block";
 }
 
 function closeEditPopup() 
@@ -410,43 +380,7 @@ function closeEditPopup()
 // To save the changes to the server
 function saveEdit(event) 
 {
-    const contactID = document.getElementById("editPopup").getAttribute("data-id");
-    const selectedField = document.getElementById("dropdown").value;
-    const newValue = document.getElementById("editValue").value.trim();
-    const messageBox = document.getElementById("messageBox");
-
-	messageBox.textContent = "";
-
-    // send data to server
-    const tmp = {
-        ID: contactID,
-        UpdateCol: selectedField,
-        NewData: newValue,
-    };
-
-	let jsonPayload = JSON.stringify(tmp);
-    let url = urlBase + '/EditContact.' + extension;
-
-	let xhr = new XMLHttpRequest();
-    xhr.open("POST", url, true);
-    xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
-
-	xhr.onreadystatechange = function () {
-        if (xhr.readyState === 4) {
-            if (xhr.status === 200) {
-                let response = JSON.parse(xhr.responseText);
-
-                if (response.error) {
-                    messageBox.textContent("Error: " + response.error);
-                } else {
-                    closeEditPopup();
-                    searchContacts(); 
-                }
-            }
-        }
-    };
-
-    xhr.send(jsonPayload);
+  
 }
 
 function deleteContact(index) 
