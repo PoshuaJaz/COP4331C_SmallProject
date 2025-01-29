@@ -123,9 +123,7 @@ function showLogin()
     document.getElementById("loginSection").style.display = "block";
 }
 
-// YONI
 // Register Fucntion 
-// Note: need to implement restrictions for the username and password
 function saveRegister(event) 
 {
     event.preventDefault();
@@ -136,6 +134,22 @@ function saveRegister(event)
     let password = document.getElementById("registerPassword").value.trim();
     let confirmPassword = document.getElementById("registerConfirmPassword").value.trim();
     let registerResult = document.getElementById("registerResult");
+
+    // username validation
+    let usernameRegex = /^[a-zA-Z]\w{3,18}$/;
+    if (!usernameRegex.test(username)) {
+        registerResult.textContent = "Username must start with a letter and contain 3-18 valid characters (letters, numbers, underscores, or hyphens). Example: A_user123 or B-12345.";
+        registerResult.style.color = "red";
+        return;
+    }
+
+    // password validation
+    let passwordRegex = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,32}$/;
+    if (!passwordRegex.test(password)) {
+        registerResult.textContent = "Password must be 8-32 characters and include at least one letter, one number, and one special character. Example: P@ssw0rd123 or Secure!456.";
+        registerResult.style.color = "red";
+        return;
+    }
 
     // passwordconfirm 
     if (password !== confirmPassword) {
