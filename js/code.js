@@ -269,7 +269,7 @@ function searchContacts()
                             <td>
                                 <div>
                                     <button class="editing-icon" onclick="showEditPopup(${index})"> Edit </button>
-                                    <button class="delete-icon" onclick="deleteContact(${index})"> Delete </button>
+                                    <button onclick="deleteContact(${contact.ID})">Delete</button>
                                 </div>
                             </td>
                         `;
@@ -299,7 +299,7 @@ function searchContacts()
 // To implement the popup so that it displays the existing contact data
 function showEditPopup(index) 
 {
-
+    // Josh
 }
 
 function closeEditPopup() 
@@ -313,7 +313,7 @@ function closeEditPopup()
 // To save the changes to the server
 function saveEdit(event) 
 {
-
+    // Josh
 }
 
 function deleteContact(index) 
