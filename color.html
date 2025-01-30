@@ -21,6 +21,7 @@
 </head>
 <div>
 	<div class="header">
+		<div id="logoutResult"></div>
 		<span id="userName"></span>
 		<button class="loginbutton" onclick="doLogout()">Logout</button>
 	</div>
@@ -78,7 +79,7 @@
 			</select>
 	
 			<input type="text" id="editValue" name="value" placeholder="Enter new value" required>
-			
+			<div id="editMessage" class="message"></div>
 			<div class="popup-buttons">
 				<button type="button" class="btn-cancel" onclick="closeEditPopup()">Cancel</button>
 				<button type="submit" class="btn-save">Save</button>
