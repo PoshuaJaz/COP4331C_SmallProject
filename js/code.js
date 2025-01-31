@@ -48,7 +48,6 @@ function doLogin(event)
 
                 displayMessage(loginResult, "Login successful!", "green");
 
-                // window.location.href = "color.html";
                 setTimeout(() => {
                     window.location.href = "color.html";
                 }, 1000);
@@ -107,7 +106,6 @@ function doLogout()
 	firstName = "";
 	lastName = "";
 	document.cookie = "firstName= ; expires = Thu, 01 Jan 1970 00:00:00 GMT";
-	// window.location.href = "index.html";
 
     let logoutResult = document.getElementById("logoutResult");
 
@@ -208,9 +206,11 @@ function closeAddPopup()
 	document.getElementById('overlay').style.display = 'none';
 }
 
-function saveNewContact() 
+function saveNewContact(event) 
 {
-	// Will
+	event.preventDefault();
+    
+    // Will
 }
 
 function loadUserContacts() 
@@ -250,11 +250,13 @@ function loadUserContacts()
                             <td>${contact.LastName}</td>
                             <td>${contact.Phone}</td>
                             <td>${contact.Email}</td>
-                            <td>
-                                <div>
-                                    <button class="editing-icon" onclick="showEditPopup(${index})"> Edit </button>
-                                    <button onclick="deleteContact(${contact.ID})">Delete</button>
-                                </div>
+                            <td class="button-group">
+                                <button type="button" class="edit-btn btn-xs dt-edit" style="margin-right:16px;" onclick="showEditPopup(${index})">
+                                    <i class="fas fa-edit"></i> Edit
+                                </button>
+                                <button type="button" class="delete-btn btn-xs dt-delete" onclick="deleteContact(${contact.ID})">
+                                    <i class="fas fa-trash-alt"></i> Delete
+                                </button>
                             </td>
                         `;
                         contactTableBody.appendChild(row);
@@ -320,14 +322,17 @@ function searchContacts()
                             <td>${contact.LastName}</td>
                             <td>${contact.Phone}</td>
                             <td>${contact.Email}</td>
-                            <td>
-                                <div>
-                                    <button class="editing-icon" onclick="showEditPopup(${index})"> Edit </button>
-                                    <button onclick="deleteContact(${contact.ID})">Delete</button>
-                                </div>
+                            <td class="button-group">
+                                <button type="button" class="edit-btn btn-xs dt-edit" style="margin-right:16px;" onclick="showEditPopup(${index})">
+                                    <i class="fas fa-edit"></i> Edit
+                                </button>
+                                <button type="button" class="delete-btn btn-xs dt-delete" onclick="deleteContact(${contact.ID})">
+                                    <i class="fas fa-trash-alt"></i> Delete
+                                </button>
                             </td>
                         `;
                         contactTableBody.appendChild(row);
+
                     });
 
                     let emptyRowCount = 15 - response.results.length;
@@ -398,16 +403,14 @@ function closeEditPopup()
     document.getElementById("editMessage").textContent = "";
 }
 
-
-// Edit contact 
 function saveEdit(event) 
 {
     event.preventDefault();
 
-    const contactID = document.getElementById("editPopup").getAttribute("data-id");
-    const selectedField = document.getElementById("dropdown").value;
-    const newValue = document.getElementById("editValue").value.trim();
-    const messageBox = document.getElementById("editMessage");
+    let contactID = document.getElementById("editPopup").getAttribute("data-id");
+    let selectedField = document.getElementById("dropdown").value;
+    let newValue = document.getElementById("editValue").value.trim();
+    let messageBox = document.getElementById("editMessage");
 
 	messageBox.textContent = "";
 
@@ -457,15 +460,15 @@ function saveEdit(event)
 
 function deleteContact(index) 
 {
-	const contactRow = document.querySelector(`#contactTable tbody tr[data-id="${index}"]`);
-	const messageBox = document.getElementById("messageBox");
+	let contactRow = document.querySelector(`#contactTable tbody tr[data-id="${index}"]`);
+	let messageBox = document.getElementById("messageBox");
 
 	messageBox.textContent = "";
 
-	const contactID = index;
+	let contactID = index;
 
-    const jsonPayload = JSON.stringify({ contactID: contactID });
-    const url = urlBase + '/DeleteContact.' + extension;
+    let jsonPayload = JSON.stringify({ contactID: contactID });
+    let url = urlBase + '/DeleteContact.' + extension;
 
 	let xhr = new XMLHttpRequest();
     xhr.open("POST", url, true);
@@ -519,7 +522,7 @@ function addEmptyRows(count) {
 
 // validate for register 
 function validateRegisterInput(firstName, lastName, username, password, confirmPassword) {
-    const messageBox = document.getElementById("registerResult"); 
+    let messageBox = document.getElementById("registerResult"); 
 
     if (!firstName.trim() || !lastName.trim() || !username.trim() || !password.trim() || !confirmPassword.trim()) {
         displayMessage(messageBox, "Error: All fields are required.", "red");
@@ -527,7 +530,7 @@ function validateRegisterInput(firstName, lastName, username, password, confirmP
     }
 
     // First Name & Last Name 
-    const nameRegex = /^[A-Za-z]+$/;
+    let nameRegex = /^[A-Za-z]+$/;
     if (!nameRegex.test(firstName)) {
         displayMessage(messageBox, "Error: First name must contain only letters (A-Z, a-z).", "red");
         return false;
@@ -538,14 +541,14 @@ function validateRegisterInput(firstName, lastName, username, password, confirmP
     }
 
     // Username 
-    const usernameRegex = /^[a-zA-Z]\w{3,18}$/;
+    let usernameRegex = /^[a-zA-Z]\w{3,18}$/;
     if (!usernameRegex.test(username)) {
         displayMessage(messageBox, "Error: Username must start with a letter and contain 3-18 valid characters (letters, numbers, underscores, or hyphens).", "red");
         return false;
     }
 
     // Password 
-    const passwordRegex = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,32}$/;
+    let passwordRegex = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,32}$/;
     if (!passwordRegex.test(password)) {
         displayMessage(messageBox, "Error: Password must be 8-32 characters and include at least one letter, one number, and one special character.", "red");
         return false;
@@ -564,12 +567,11 @@ function validateRegisterInput(firstName, lastName, username, password, confirmP
 // validate for edit 
 function validateInput(field, value) {
 
-    const messageBox = document.getElementById("editMessage");
+    let messageBox = document.getElementById("editMessage");
 
-    const nameRegex = /^[a-zA-Z]+$/; 
-    const phoneRegex = /^[0-9\-\+\s]{10,17}$/;
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; 
-
+    let nameRegex = /^[a-zA-Z]+$/; 
+    let phoneRegex = /^[0-9\-\+\s]{10,17}$/;
+    let emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; 
     let errorMessage = "";
 
     if (field === "FirstName" || field === "LastName") {
