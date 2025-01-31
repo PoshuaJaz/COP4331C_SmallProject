@@ -215,7 +215,7 @@ function saveNewContact(event)
     let phone = document.getElementById("contactPhone").value.trim();
     let email = document.getElementById("contactEmail").value.trim();
     let addResult = document.getElementById("addMessage");
-    registerResult.textContent = ""; 
+    addResult.textContent = ""; 
 
     if (!validateInputAdd(firstName) && !validateInputAdd(lastName) && !validateInputAdd(phone) && !validateInputAdd(email)) {
         return; 
@@ -244,9 +244,9 @@ function saveNewContact(event)
                 let response = JSON.parse(xhr.responseText);
 
                 if (response.error) {
-                    displayMessage(registerResult,response.error);
+                    displayMessage(addResult,response.error);
                 } else {
-                    displayMessage(registerResult, "Registration successful!", "green");
+                    displayMessage(addResult, "Registration successful!", "green");
                     // showLogin();
                     setTimeout(() => {
                         closeAddPopup();
@@ -254,7 +254,7 @@ function saveNewContact(event)
                     }, 1000); 
                 }
             } else {
-                displayMessage(registerResult,`Error: ${xhr.status} - ${xhr.statusText}`);
+                displayMessage(addResult,`Error: ${xhr.status} - ${xhr.statusText}`);
             }
         }
     };
