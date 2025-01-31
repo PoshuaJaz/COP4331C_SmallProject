@@ -208,9 +208,57 @@ function closeAddPopup()
 
 function saveNewContact(event) 
 {
-	event.preventDefault();
-    
-    // Will
+    event.preventDefault();
+
+    let firstName = document.getElementById("contactFirstName").value.trim();
+    let lastName = document.getElementById("contactLastName").value.trim();
+    let phone = document.getElementById("contactPhone").value.trim();
+    let email = document.getElementById("contactEmail;").value.trim();
+    let addResult = document.getElementById("addMessage");
+    registerResult.textContent = ""; 
+
+    if (!validateInputAdd(firstName) && !validateInputAdd(lastName) && !validateInputAdd(phone) && !validateInputAdd(email)) {
+        return; 
+    }
+
+    // send data to server
+    let tmp = {
+        FirstName: firstName,
+        LastName: lastName,
+        Phone: phone,
+        Email: email,
+        UserID: userId
+    };
+
+    let jsonPayload = JSON.stringify(tmp);
+
+    let url = urlBase + '/AddContact.' + extension;
+
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST", url, true);
+    xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+                let response = JSON.parse(xhr.responseText);
+
+                if (response.error) {
+                    displayMessage(registerResult,response.error);
+                } else {
+                    displayMessage(registerResult, "Registration successful!", "green");
+                    // showLogin();
+                    setTimeout(() => {
+                        closeAddPopup();
+                        searchContacts();
+                    }, 1000); 
+                }
+            } else {
+                displayMessage(registerResult,`Error: ${xhr.status} - ${xhr.statusText}`);
+            }
+        }
+    };
+    xhr.send(jsonPayload);
 }
 
 function loadUserContacts() 
@@ -568,6 +616,37 @@ function validateRegisterInput(firstName, lastName, username, password, confirmP
 function validateInput(field, value) {
 
     let messageBox = document.getElementById("editMessage");
+
+    let nameRegex = /^[a-zA-Z]+$/; 
+    let phoneRegex = /^[0-9\-\+\s]{10,17}$/;
+    let emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; 
+    let errorMessage = "";
+
+    if (field === "FirstName" || field === "LastName") {
+        if (!nameRegex.test(value)) {
+            errorMessage = "Error: Name must contain only letters.";
+        }
+    } else if (field === "Phone") {
+        if (!phoneRegex.test(value)) {
+            errorMessage = "Error: Phone number must be 10-15 digits (numbers only).";
+        }
+    } else if (field === "Email") {
+        if (!emailRegex.test(value)) {
+            errorMessage = "Error: Invalid email format (example@example.com).";
+        }
+    }
+
+    if (errorMessage) {
+        displayMessage(messageBox, errorMessage, "red");
+        return false;
+    }
+
+    return true; 
+}
+
+function validateInputAdd(field, value) {
+
+    let messageBox = document.getElementById("addMessage");
 
     let nameRegex = /^[a-zA-Z]+$/; 
     let phoneRegex = /^[0-9\-\+\s]{10,17}$/;
