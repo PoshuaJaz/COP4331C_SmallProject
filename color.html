@@ -11,6 +11,7 @@
 	<link rel="stylesheet" type="text/css" href="css/styles.css">
 	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
 	<title>Contact Sort</title>
 	<script type="text/javascript">
 		document.addEventListener('DOMContentLoaded', function() 
@@ -56,11 +57,28 @@
 	<div class="popup addpopup" id="addPopup">
 		<h3>Add Contact</h3>
 		<form id="addContactForm" onsubmit="saveNewContact(event)">
-			<input type="text" id="contactFirstName" name="firstName" placeholder="First Name" required>
-			<input type="text" id="contactLastName" name="lastName" placeholder="Last Name" required>
-			<input type="text" id="contactPhone" name="phone" placeholder="Phone Number" required>
-			<input type="email" id="contactEmail" name="email" placeholder="Email" required>
+			<div class="form-group">
+				<label for="contactFirstName">First Name</label>
+				<input type="text" id="contactFirstName" name="firstName" placeholder="First Name" required>
+			</div>
+	
+			<div class="form-group">
+				<label for="contactLastName">Last Name</label>
+				<input type="text" id="contactLastName" name="lastName" placeholder="Last Name" required>
+			</div>
+	
+			<div class="form-group">
+				<label for="contactPhone">Phone Number</label>
+				<input type="text" id="contactPhone" name="phone" placeholder="Phone Number" required>
+			</div>
+	
+			<div class="form-group">
+				<label for="contactEmail">Email</label>
+				<input type="email" id="contactEmail" name="email" placeholder="Email" required>
+			</div>
+
 			<div id="addMessage" class="message"></div>
+			<div class="popup-buttons">
 				<button type="button" class="btn-cancel" onclick="closeAddPopup()">Cancel</button>
 				<button type="submit" class="btn-save">Save</button>
 			</div>
@@ -70,16 +88,17 @@
 	<div class="popup editPopup" id="editPopup" data-id="">
 		<h3>Edit Contact</h3>
 		<form id="editContactForm" onsubmit="saveEdit(event)">
-			<label for="dropdown">Choose a field to edit:</label>
-			<select id="dropdown" name="options" required>
-				<option value="" disabled selected>Select a field</option>
-				<option value="FirstName">First Name</option>
-				<option value="LastName">Last Name</option>
-				<option value="Phone">Phone</option>
-				<option value="Email">Email</option>
-			</select>
-	
-			<input type="text" id="editValue" name="value" placeholder="Enter new value" required>
+			<div class="form-group">
+				<label for="dropdown">Choose a field to edit:</label>
+				<select id="dropdown" name="options" required>
+					<option value="" disabled selected>Select a field</option>
+					<option value="FirstName">First Name</option>
+					<option value="LastName">Last Name</option>
+					<option value="Phone">Phone</option>
+					<option value="Email">Email</option>
+				</select>
+			</div>
+			<input type="text" id="editValue" name="value" required>
 			<div id="editMessage" class="message"></div>
 			<div class="popup-buttons">
 				<button type="button" class="btn-cancel" onclick="closeEditPopup()">Cancel</button>
@@ -93,3 +112,5 @@
 		<p>&copy; All Rights Reserved 2025.</p>
 </body>
 </html>
+
+
