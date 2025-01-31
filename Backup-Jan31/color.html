@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- add meta after lighthouse -->
+	<meta name="description" content="This is a contact management web application. Easily add, edit, delete, and search contacts.">
+	<script type="text/javascript" src="js/md5.js"></script>
+	<script type="text/javascript" src="js/code.js"></script>
+	<link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="css/styles.css">
+	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+	<title>Contact Sort</title>
+	<script type="text/javascript">
+		document.addEventListener('DOMContentLoaded', function() 
+		{
+			readCookie();
+			loadUserContacts() 
+		}, false);
+		</script>
+</head>
+<div>
+	<div class="header">
+		<div id="logoutResult"></div>
+		<span id="userName"></span>
+		<button class="loginbutton" onclick="doLogout()">Logout</button>
+	</div>
+
+	<div class="control-group">
+		<button class="addButton" onclick="showAddContactPopup()">ADD</button>
+		<div class="search-box">
+			<input type="text" id="searchFirstName" placeholder="First Name">
+			<input type="text" id="searchLastName" placeholder="Last Name">
+			<button class="searchButton" onclick="searchContacts()">SEARCH</button>
+		</div>
+	</div>
+	<div id="messageBox" style="color: rgb(10, 105, 228); margin: 10px 0;"></div>
+	<div class="table-container"></div>
+		<table id="contactTable">
+			<thead>
+				<tr>
+					<th>First Name</th>
+					<th>Last Name</th>
+					<th>Phone</th>
+					<th>Email</th>
+					<th>Action</th>
+				</tr>
+			</thead>
+			<tbody>
+				
+			</tbody>
+		</table>
+	</div>
+
+	<div class="popup addpopup" id="addPopup">
+		<h3>Add Contact</h3>
+		<form id="addContactForm" onsubmit="saveNewContact(event)">
+			<div class="form-group">
+				<label for="contactFirstName">First Name</label>
+				<input type="text" id="contactFirstName" name="firstName" placeholder="First Name" required>
+			</div>
+	
+			<div class="form-group">
+				<label for="contactLastName">Last Name</label>
+				<input type="text" id="contactLastName" name="lastName" placeholder="Last Name" required>
+			</div>
+	
+			<div class="form-group">
+				<label for="contactPhone">Phone Number</label>
+				<input type="text" id="contactPhone" name="phone" placeholder="Phone Number" required>
+			</div>
+	
+			<div class="form-group">
+				<label for="contactEmail">Email</label>
+				<input type="email" id="contactEmail" name="email" placeholder="Email" required>
+			</div>
+
+			<div id="addMessage" class="message"></div>
+			<div class="popup-buttons">
+				<button type="button" class="btn-cancel" onclick="closeAddPopup()">Cancel</button>
+				<button type="submit" class="btn-save">Save</button>
+			</div>
+		</form>
+	</div>
+
+	<div class="popup editPopup" id="editPopup" data-id="">
+		<h3>Edit Contact</h3>
+		<form id="editContactForm" onsubmit="saveEdit(event)">
+			<div class="form-group">
+				<label for="dropdown">Choose a field to edit:</label>
+				<select id="dropdown" name="options" required>
+					<option value="" disabled selected>Select a field</option>
+					<option value="FirstName">First Name</option>
+					<option value="LastName">Last Name</option>
+					<option value="Phone">Phone</option>
+					<option value="Email">Email</option>
+				</select>
+			</div>
+			<input type="text" id="editValue" name="value" required>
+			<div id="editMessage" class="message"></div>
+			<div class="popup-buttons">
+				<button type="button" class="btn-cancel" onclick="closeEditPopup()">Cancel</button>
+				<button type="submit" class="btn-save">Save</button>
+			</div>
+		</form>
+	</div>
+	
+	<div class="overlay" id="overlay"></div>
+	<footer>
+		<p>&copy; All Rights Reserved 2025.</p>
+</body>
+</html>
+
+
