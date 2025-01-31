@@ -213,7 +213,7 @@ function saveNewContact(event)
     let firstName = document.getElementById("contactFirstName").value.trim();
     let lastName = document.getElementById("contactLastName").value.trim();
     let phone = document.getElementById("contactPhone").value.trim();
-    let email = document.getElementById("contactEmail;").value.trim();
+    let email = document.getElementById("contactEmail").value.trim();
     let addResult = document.getElementById("addMessage");
     registerResult.textContent = ""; 
 
