@@ -48,6 +48,7 @@ function doLogin(event)
 
                 displayMessage(loginResult, "Login successful!", "green");
 
+                // window.location.href = "color.html";
                 setTimeout(() => {
                     window.location.href = "color.html";
                 }, 1000);
@@ -106,6 +107,7 @@ function doLogout()
 	firstName = "";
 	lastName = "";
 	document.cookie = "firstName= ; expires = Thu, 01 Jan 1970 00:00:00 GMT";
+	// window.location.href = "index.html";
 
     let logoutResult = document.getElementById("logoutResult");
 
@@ -217,9 +219,12 @@ function saveNewContact(event)
     let addResult = document.getElementById("addMessage");
     addResult.textContent = ""; 
 
-    if (!validateInputAdd(firstName) && !validateInputAdd(lastName) && !validateInputAdd(phone) && !validateInputAdd(email)) {
-        return; 
+    if (!validateInput("FirstName", firstName, "addMessage") || !validateInput("LastName", lastName, "addMessage") ||!validateInput("Phone", phone, "addMessage") ||
+        !validateInput("Email", email, "addMessage")
+    ) {
+        return;
     }
+    console.log("UserID before sending:", userId);
 
     // send data to server
     let tmp = {
@@ -232,6 +237,8 @@ function saveNewContact(event)
 
     let jsonPayload = JSON.stringify(tmp);
 
+    console.log("Sending JSON payload:", jsonPayload);
+
     let url = urlBase + '/AddContact.' + extension;
 
     let xhr = new XMLHttpRequest();
@@ -240,6 +247,8 @@ function saveNewContact(event)
 
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {
+            console.log("Server Response:", xhr.responseText);
+
             if (xhr.status === 200) {
                 let response = JSON.parse(xhr.responseText);
 
@@ -247,7 +256,7 @@ function saveNewContact(event)
                     displayMessage(addResult,response.error);
                 } else {
                     displayMessage(addResult, "Registration successful!", "green");
-                    // showLogin();
+
                     setTimeout(() => {
                         closeAddPopup();
                         searchContacts();
@@ -287,7 +296,6 @@ function loadUserContacts()
             if (xhr.status === 200) {
                 let response = JSON.parse(xhr.responseText);
                 if (response.error) {
-                    //displayMessage(messageBox,`Error: ${xhr.status} - ${xhr.statusText}`);
                     addEmptyRows(15);
                 } else if (response.results && response.results.length > 0) {
                     response.results.forEach((contact, index) => {
@@ -380,7 +388,6 @@ function searchContacts()
                             </td>
                         `;
                         contactTableBody.appendChild(row);
-
                     });
 
                     let emptyRowCount = 15 - response.results.length;
@@ -421,7 +428,6 @@ function showEditPopup(index)
 	document.getElementById("dropdown").value = "FirstName";
 	document.getElementById("editValue").value = firstName;
 
-   
 
 	document.getElementById("dropdown").addEventListener("change", function () {
         const selectedField = this.value;
@@ -455,14 +461,14 @@ function saveEdit(event)
 {
     event.preventDefault();
 
-    let contactID = document.getElementById("editPopup").getAttribute("data-id");
-    let selectedField = document.getElementById("dropdown").value;
-    let newValue = document.getElementById("editValue").value.trim();
-    let messageBox = document.getElementById("editMessage");
+    const contactID = document.getElementById("editPopup").getAttribute("data-id");
+    const selectedField = document.getElementById("dropdown").value;
+    const newValue = document.getElementById("editValue").value.trim();
+    const messageBox = document.getElementById("editMessage");
 
 	messageBox.textContent = "";
 
-    if (!validateInput(selectedField, newValue)) {
+    if (!validateInput(selectedField, newValue, "editMessage")) {
         return;
     }
 
@@ -508,15 +514,15 @@ function saveEdit(event)
 
 function deleteContact(index) 
 {
-	let contactRow = document.querySelector(`#contactTable tbody tr[data-id="${index}"]`);
-	let messageBox = document.getElementById("messageBox");
+	const contactRow = document.querySelector(`#contactTable tbody tr[data-id="${index}"]`);
+	const messageBox = document.getElementById("messageBox");
 
 	messageBox.textContent = "";
 
-	let contactID = index;
+	const contactID = index;
 
-    let jsonPayload = JSON.stringify({ contactID: contactID });
-    let url = urlBase + '/DeleteContact.' + extension;
+    const jsonPayload = JSON.stringify({ contactID: contactID });
+    const url = urlBase + '/DeleteContact.' + extension;
 
 	let xhr = new XMLHttpRequest();
     xhr.open("POST", url, true);
@@ -570,7 +576,7 @@ function addEmptyRows(count) {
 
 // validate for register 
 function validateRegisterInput(firstName, lastName, username, password, confirmPassword) {
-    let messageBox = document.getElementById("registerResult"); 
+    const messageBox = document.getElementById("registerResult"); 
 
     if (!firstName.trim() || !lastName.trim() || !username.trim() || !password.trim() || !confirmPassword.trim()) {
         displayMessage(messageBox, "Error: All fields are required.", "red");
@@ -578,7 +584,7 @@ function validateRegisterInput(firstName, lastName, username, password, confirmP
     }
 
     // First Name & Last Name 
-    let nameRegex = /^[A-Za-z]+$/;
+    const nameRegex = /^[A-Za-z]+$/;
     if (!nameRegex.test(firstName)) {
         displayMessage(messageBox, "Error: First name must contain only letters (A-Z, a-z).", "red");
         return false;
@@ -589,14 +595,14 @@ function validateRegisterInput(firstName, lastName, username, password, confirmP
     }
 
     // Username 
-    let usernameRegex = /^[a-zA-Z]\w{3,18}$/;
+    const usernameRegex = /^[a-zA-Z]\w{3,18}$/;
     if (!usernameRegex.test(username)) {
         displayMessage(messageBox, "Error: Username must start with a letter and contain 3-18 valid characters (letters, numbers, underscores, or hyphens).", "red");
         return false;
     }
 
     // Password 
-    let passwordRegex = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,32}$/;
+    const passwordRegex = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,32}$/;
     if (!passwordRegex.test(password)) {
         displayMessage(messageBox, "Error: Password must be 8-32 characters and include at least one letter, one number, and one special character.", "red");
         return false;
@@ -613,44 +619,14 @@ function validateRegisterInput(firstName, lastName, username, password, confirmP
 
 
 // validate for edit 
-function validateInput(field, value) {
+function validateInput(field, value,messageBoxId) {
 
-    let messageBox = document.getElementById("editMessage");
+    const messageBox = document.getElementById(messageBoxId);
 
-    let nameRegex = /^[a-zA-Z]+$/; 
-    let phoneRegex = /^[0-9\-\+\s]{10,17}$/;
-    let emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; 
-    let errorMessage = "";
+    const nameRegex = /^[a-zA-Z]+$/; 
+    const phoneRegex = /^[0-9\-\+\s]{10,17}$/;
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; 
 
-    if (field === "FirstName" || field === "LastName") {
-        if (!nameRegex.test(value)) {
-            errorMessage = "Error: Name must contain only letters.";
-        }
-    } else if (field === "Phone") {
-        if (!phoneRegex.test(value)) {
-            errorMessage = "Error: Phone number must be 10-15 digits (numbers only).";
-        }
-    } else if (field === "Email") {
-        if (!emailRegex.test(value)) {
-            errorMessage = "Error: Invalid email format (example@example.com).";
-        }
-    }
-
-    if (errorMessage) {
-        displayMessage(messageBox, errorMessage, "red");
-        return false;
-    }
-
-    return true; 
-}
-
-function validateInputAdd(field, value) {
-
-    let messageBox = document.getElementById("addMessage");
-
-    let nameRegex = /^[a-zA-Z]+$/; 
-    let phoneRegex = /^[0-9\-\+\s]{10,17}$/;
-    let emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; 
     let errorMessage = "";
 
     if (field === "FirstName" || field === "LastName") {
