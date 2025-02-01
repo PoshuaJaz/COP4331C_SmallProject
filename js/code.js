@@ -298,6 +298,9 @@ function loadUserContacts()
                 if (response.error) {
                     addEmptyRows(15);
                 } else if (response.results && response.results.length > 0) {
+
+                    response.results.sort((a, b) => a.FirstName.toLowerCase().localeCompare(b.FirstName.toLowerCase()));
+
                     response.results.forEach((contact, index) => {
                         let row = document.createElement("tr");
                         row.setAttribute("data-id", contact.ID);
@@ -370,6 +373,9 @@ function searchContacts()
                     displayMessage(messageBox,"Error: " + response.error);
                     addEmptyRows(15);
                 } else if (response.results && response.results.length > 0) {
+
+                    response.results.sort((a, b) => a.FirstName.toLowerCase().localeCompare(b.FirstName.toLowerCase()));
+
                     response.results.forEach((contact,index) => {
                         let row = document.createElement("tr");
 						row.setAttribute("data-id", contact.ID);
