@@ -197,7 +197,13 @@ function saveRegister(event)
 // Show pop-up for add contact 
 function showAddContactPopup() 
 {
-	document.getElementById('addPopup').style.display = 'block';
+    document.getElementById("contactFirstName").value = "";
+    document.getElementById("contactLastName").value = "";
+    document.getElementById("contactPhone").value = "";
+    document.getElementById("contactEmail").value = "";
+    document.getElementById("addMessage").textContent = "";
+    
+    document.getElementById('addPopup').style.display = 'block';
 	document.getElementById('overlay').style.display = 'block';
 }
 
