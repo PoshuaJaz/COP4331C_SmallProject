@@ -97,7 +97,12 @@ function readCookie()
 	}
 	else
 	{
-		document.getElementById("userName").innerHTML = "Logged in as " + firstName + " " + lastName;
+		// document.getElementById("userName").innerHTML = "Logged in as " + firstName + " " + lastName;
+
+        let welcomeMessage = document.querySelector(".welcome-message");
+        if (welcomeMessage) {
+            welcomeMessage.textContent = `Hello, ${firstName}!`;
+        }
 	}
 }
 
@@ -197,7 +202,7 @@ function saveRegister(event)
 // Show pop-up for add contact 
 function showAddContactPopup() 
 {
-    document.getElementById("contactFirstName").value = "";
+	document.getElementById("contactFirstName").value = "";
     document.getElementById("contactLastName").value = "";
     document.getElementById("contactPhone").value = "";
     document.getElementById("contactEmail").value = "";
@@ -304,7 +309,7 @@ function loadUserContacts()
                 if (response.error) {
                     addEmptyRows(15);
                 } else if (response.results && response.results.length > 0) {
-
+                    
                     response.results.sort((a, b) => a.FirstName.toLowerCase().localeCompare(b.FirstName.toLowerCase()));
 
                     response.results.forEach((contact, index) => {
@@ -685,3 +690,4 @@ function displayMessage(element, message, color = "red") {
         }, 1200);
     }
 }
+
