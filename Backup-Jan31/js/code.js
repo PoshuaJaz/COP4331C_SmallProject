@@ -97,9 +97,25 @@ function readCookie()
 	}
 	else
 	{
-		document.getElementById("userName").innerHTML = "Logged in as " + firstName + " " + lastName;
+		// document.getElementById("userName").innerHTML = "Logged in as " + firstName + " " + lastName;
+
+        let welcomeMessage = document.querySelector(".welcome-message");
+        if (welcomeMessage) {
+            welcomeMessage.textContent = `Hello, ${firstName}!`;
+        }
 	}
 }
+
+// to remove login information
+document.addEventListener("DOMContentLoaded", function () {
+    if (window.location.pathname.includes("index.html")) {
+        document.cookie = "firstName=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/";
+        document.cookie = "lastName=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/";
+        document.cookie = "userId=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/";
+        localStorage.removeItem("userToken");
+        sessionStorage.removeItem("userToken");
+    }
+});
 
 function doLogout()
 {
@@ -107,8 +123,13 @@ function doLogout()
 	firstName = "";
 	lastName = "";
 	document.cookie = "firstName= ; expires = Thu, 01 Jan 1970 00:00:00 GMT";
-	// window.location.href = "index.html";
+	document.cookie = "lastName= ; expires = Thu, 01 Jan 1970 00:00:00 GMT";
+    document.cookie = "userId= ; expires = Thu, 01 Jan 1970 00:00:00 GMT";
+    // window.location.href = "index.html";
 
+    localStorage.removeItem("userToken");
+    sessionStorage.removeItem("userToken");
+    
     let logoutResult = document.getElementById("logoutResult");
 
     if (logoutResult) {
@@ -197,7 +218,13 @@ function saveRegister(event)
 // Show pop-up for add contact 
 function showAddContactPopup() 
 {
-	document.getElementById('addPopup').style.display = 'block';
+	document.getElementById("contactFirstName").value = "";
+    document.getElementById("contactLastName").value = "";
+    document.getElementById("contactPhone").value = "";
+    document.getElementById("contactEmail").value = "";
+    document.getElementById("addMessage").textContent = "";
+    
+    document.getElementById('addPopup').style.display = 'block';
 	document.getElementById('overlay').style.display = 'block';
 }
 
@@ -298,6 +325,9 @@ function loadUserContacts()
                 if (response.error) {
                     addEmptyRows(15);
                 } else if (response.results && response.results.length > 0) {
+                    
+                    response.results.sort((a, b) => a.FirstName.toLowerCase().localeCompare(b.FirstName.toLowerCase()));
+
                     response.results.forEach((contact, index) => {
                         let row = document.createElement("tr");
                         row.setAttribute("data-id", contact.ID);
@@ -370,6 +400,9 @@ function searchContacts()
                     displayMessage(messageBox,"Error: " + response.error);
                     addEmptyRows(15);
                 } else if (response.results && response.results.length > 0) {
+
+                    response.results.sort((a, b) => a.FirstName.toLowerCase().localeCompare(b.FirstName.toLowerCase()));
+
                     response.results.forEach((contact,index) => {
                         let row = document.createElement("tr");
 						row.setAttribute("data-id", contact.ID);

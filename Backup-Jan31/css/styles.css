@@ -1,4 +1,3 @@
-/* INDEX HTML */
 body {
     margin: 0;
     font-family: 'Roboto', sans-serif;
@@ -8,6 +7,7 @@ body {
     height: 100vh;
 }
 
+/* index.html */
 .container {
     display: flex;
     flex: 1;
@@ -24,13 +24,58 @@ body {
 }
 
 .left-section {
-    background-color: #b6d2ec6e; 
+    background: url('/images/fish.webp') no-repeat center center;
+    background-size: cover;
     text-align: center;
 }
 
+#aboutSection {
+    background-color: rgba(0, 0, 0, 0.5); 
+    color: #F4F4F4; 
+    padding: 20px;
+    border-radius: 10px;
+}
+
 .right-section {
-    background-color: #ffffff;
+    background-color: #F4F4F4 ;
     text-align: center;
+}
+
+#loginSection, #registerSection {
+    width: 100%;
+    max-width: 400px;
+    padding: 20px;
+    background-color: #F4F4F4;
+}
+
+#loginSection input, #registerSection input {
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+#loginSection button, #registerSection button {
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    background-color: #000000;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#loginSection button:hover, #registerSection button:hover {
+    background-color: #b1b288;
+}
+
+#loginSection p, #registerSection p {
+    margin-top: 5px;
+    font-size: 0.9rem;
+    color: #333;
 }
 
 .input-group {
@@ -68,64 +113,10 @@ body {
     text-align: center; 
 }
 
-.btn-primary {
-    width: 100%;
-    padding: 10px;
-    background-color:#00408f;
-    color: #ffffff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 1rem;
-}
-
-.btn-primary:hover {
-    background-color: #052f5c;
-}
-
 .center-text {
     text-align: center;
-    margin-top: 10px;
 }
 
-
-#loginSection, #registerSection {
-    width: 100%;
-    max-width: 400px;
-}
-
-#loginSection input, #registerSection input {
-    width: 100%;
-    padding: 10px;
-    font-size: 1rem;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
-
-/* change color after lighthouse */
-#loginSection button, #registerSection button {
-    width: 100%;
-    padding: 10px;
-    font-size: 1rem;
-    background-color: #00408f;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-#loginSection button:hover, #registerSection button:hover {
-    background-color: #0056b3;
-}
-
-#loginSection p, #registerSection p {
-    margin-top: 5px;
-    font-size: 0.9rem;
-    color: #333;
-}
-
-/* change color after lighthouse */
 a {
     color: #003366; 
     text-decoration: underline;
@@ -135,7 +126,7 @@ footer {
     background-color: #333333;
     color: white;
     text-align: center;
-    padding: 10px 0;
+    padding: 10px 10px;
     position: fixed;
     bottom: 0;
     width: 100%;
@@ -147,29 +138,44 @@ footer p {
     font-weight: normal;
 }
 
-/* change color after lighthouse */
 footer a {
-    color: #ffcc00;
+    color: whitesmoke;
     text-decoration: none;
     font-weight: normal;
 }
 
 footer a:hover {
     text-decoration: underline;
-}
+} 
 
 
 /* COLOR HTML */
+.color-body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    color:#F4F4F4;
+}
+
+/* header */
 .header {
+    position: fixed;
+    top: 0;
+    width: 100%;
     display: flex;
     justify-content: flex-end;
     align-items: center;
     padding: 10px 20px;
-    background-color: #b6d2ec6e;
-    gap: 15px; 
+    background: url('/images/banner.png') no-repeat center center;
+    background-size: cover;
+    gap: 15px;
+    height: 50px; 
+    z-index: 1000;
 }
 
-.loginbutton {
+.logoutbutton {
     background-color: #fff; 
     color: #000000; 
     font-size: 1rem;
@@ -179,34 +185,35 @@ footer a:hover {
     border-radius: 20px; 
     cursor: pointer; 
     transition: all 0.3s ease;
+    margin-right: 50px;
 }
 
-.loginbutton:hover {
+.logoutbutton:hover {
     background-color: #000000; 
     color: #fff; 
 }
 
-#userName {
-    font-size: 1rem;
-    font-weight: bold;
-    color: #000;
-}
-
+/* search and add */
 .control-group {
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
     align-items: center;
     gap: 15px;
     padding: 15px;
-    margin-top: 150px;
     background-color: #f9f9f9;
     width: 66.66%;
     box-sizing: border-box;
     margin-left: auto;
     margin-right: auto;
+    margin-top: -10px;
 }
 
-
+.welcome-message {
+    font-size: 40px;
+    font-weight: bold;
+    color: #333;
+    margin-right: auto; 
+}
 
 .addButton, .searchButton {
     display: inline-flex;
@@ -240,7 +247,6 @@ footer a:hover {
     justify-content: flex-end;
 }
 
-
 .search-box input {
     padding: 5px;
     font-size: 0.8rem;
@@ -249,21 +255,113 @@ footer a:hover {
     width: 120px;
 }
 
-/* add */
+/* table */
+.table-container {
+    width: 85%;
+    padding: 10px;
+    overflow-x: auto;
+    display: flex;
+    justify-content: center;
+}
+
+#contactTable {
+    width: 90%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    table-layout: fixed;
+    text-align: center;
+    max-height: 70vh; 
+    display: flex;
+    flex-direction: column;
+}
+
+#contactTable thead {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+    position: sticky;
+    top: 0;
+    background-color:#1C1C1C;
+    text-align: center;
+    height: 50px;
+    z-index: 10; 
+    color:white;
+
+}
+
+#contactTable tbody {
+    display: block;
+    max-height: calc(70vh - 50px - 60px); 
+    overflow-y: auto;
+    width: 100%;
+    color:black;
+}
+
+#contactTable tbody tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+    height: 50px;
+}
+
+#contactTable tbody tr:nth-child(odd) {
+    background-color: #f9f9f9;
+}
+
+#contactTable tbody tr:nth-child(even) {
+    background-color: #e6e6e6;
+}
+
+
+#contactTable tbody::-webkit-scrollbar {
+    width: 8px;
+}
+
+#contactTable tbody::-webkit-scrollbar-thumb {
+    background-color: #888;
+    border-radius: 4px;
+}
+
+#contactTable tbody::-webkit-scrollbar-thumb:hover {
+    background-color: #555;
+}
+
+#contactTable tbody::-webkit-scrollbar-track {
+    background-color: #f1f1f1;
+    border-radius: 4px;
+}
+
+/* edit and delete button */
+.button-group button {
+    background: none;
+    border: none;
+    color: black;
+    font-size: 14px;
+    cursor: pointer;
+    padding: 5px 10px;
+}
+
+.button-group button:hover {
+    background: #ddd;
+}
+
+/* add and edit popup */
 .form-group {
     display: flex;
     align-items: center;
-    margin-bottom: 5px; 
+    justify-content: space-between; 
+    gap: 10px;
+    margin-bottom: 10px; 
+    color:black;
 }
 
 .form-group label {
-    width: 120px;
-    text-align: right;
-    margin-right: 10px; 
-    font-weight: bold; 
-    color: #333; 
-    font-size: 14px; 
+    width: 140px; 
+    font-weight: bold;
+    color: #333;
+    font-size: 14px;
 }
+
 .form-group input {
     flex: 1; 
     padding: 8px;
@@ -272,69 +370,7 @@ footer a:hover {
     font-size: 14px;
 }
 
-/* table */
-.table-container {
-    width: 100%; 
-    max-width: 100vw; 
-    overflow-x: auto; 
-    margin: 0 auto; 
-    padding-bottom: 20px; 
-}
-
-#contactTable {
-    width: 66.66%;
-    border-collapse: collapse;
-    margin: 20px auto;
-    font-size: 1rem;
-    font-family: 'Arial', sans-serif;
-    border-radius: 3px;
-    overflow: hidden;
-    table-layout: fixed;
-    padding-bottom: 20px; 
-}
-
-#contactTable thead th, #contactTable tbody td {
-    padding: 12px 15px;
-    text-align: left;
-    width: calc(100% / 4); 
-    box-sizing: border-box; 
-}
-
-#contactTable thead tr {
-    background: #d6d6d5;
-    color: #000000;
-    text-align: center;
-}
-
-#contactTable thead th {
-    padding: 12px 15px;
-}
-
-#contactTable tbody tr {
-    border-bottom: 1px solid #dddddd;
-    height: 40px;
-    background: #ffffff;
-    color: #000;
-    transition: all 0.3s ease;
-}
-
-#contactTable tbody tr:nth-of-type(even) {
-    background: #f3f3f3;
-}
-
-#contactTable tbody td {
-    padding: 12px 15px;
-    position: relative; 
-    padding-right: 40px;
-}
-
-#contactTable tbody tr:hover {
-    background: #d1e7fd;
-    color: #333;
-    transition: all 0.3s ease;
-}
-
-.popup {
+ .popup {
     display: none;
     position: fixed;
     top: 50%;
@@ -345,23 +381,14 @@ footer a:hover {
     border-radius: 5px;
     padding: 20px;
     z-index: 1000;
-}
+    color:black;
+ }
 
 .popup input {
     display: block;
     width: calc(100% - 20px);
     margin: 10px 0;
     padding: 5px;
-}
-
-.popup-buttons {
-    display: flex;
-    justify-content: flex-end;
-}
-
-.popup-buttons button {
-    margin-left: 10px;
-    padding: 5px 15px;
 }
 
 .overlay {
@@ -375,6 +402,7 @@ footer a:hover {
     z-index: 999;
 }
 
+/* add popup */
 .popup.addpopup {
     display: none;
     position: fixed;
@@ -389,6 +417,7 @@ footer a:hover {
     z-index: 1000;
     width: 100%;
     max-width: 400px;
+    color:black;
 }
 
 .popup.addpopup h2 {
@@ -424,12 +453,12 @@ footer a:hover {
 }
 
 .popup-buttons .btn-save {
-    background-color: #007BFF;
+    background-color: #000000;
     color: #fff;
 }
 
 .popup-buttons .btn-save:hover {
-    background-color: #0056b3;
+    background-color: #b1b288;
 }
 
 .popup-buttons .btn-cancel {
@@ -438,151 +467,21 @@ footer a:hover {
 }
 
 .popup-buttons .btn-cancel:hover {
-    background-color: #bbb;
+    background-color: #b1b288;
 }
-
-.ellipsis-icon {
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    display: inline-block;
-    width: 16px;
-    height: 16px;
-    cursor: pointer;
-}
-
-
-.action-buttons {
-    display: none; 
-    position: absolute; 
-    background: white;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    padding: 10px;
-    z-index: 1000;
-    top: 50%; 
-    left: 100%;
-    transform: translate(-50%, -50%);
-}
-
-.action-buttons button {
-    display: block;
-    width: 100%;
-    margin-bottom: 5px;
-    padding: 5px 10px;
-    font-size: 0.9rem;
-    border: none;
-    border-radius: 3px;
-    background-color: #007BFF;
-    color: white;
-    cursor: pointer;
-}
-
-.action-buttons button:first-child {
-    background-color: #007BFF;
-    color: white;
-}
-
-.action-buttons button:first-child:hover {
-    background-color: #0056b3;
-}
-
-.action-buttons button:last-child {
-    background-color: #FF4C4C; 
-    color: white;
-}
-
-.action-buttons button:last-child:hover {
-    background-color: #d11a2a; 
-}
-
-.icon-image {
-    width: 20px;
-    height: 20px;
-}
-
-button {
-    border: none;
-    background: none;
-    padding: 5px;
-    cursor: pointer;
-}
-
-button:focus {
-    outline: none;
-}
-
-/* table */
-.button-group {
-    display: flex;
-    gap: 4px;  
-    justify-content: flex-start;
-    align-items: center;
-    padding: 5px 0;
-}
-.edit-btn, .delete-btn {
-    display: inline-flex;
-    align-items: center;
-    font-size: 12px;
-    padding: 4px 8px;
-    border-radius: 4px;
-    gap: 5px;
-    cursor: pointer;
-}
-
-/* edit*/
-.edit-btn {
-    /* background-color: #007BFF; */
-    color: black;
-    border: none;
-}
-
-.edit-btn:hover {
-    background-color: #a4a7aa;
-}
-
-/* delete */
-.delete-btn {
-    /* background-color: #FF4C4C; */
-    color: black;
-    border: none;
-}
-
-.delete-btn:hover {
-    background-color: #a4a7aa;
-}
-
 
 /* edit popup */
-
- .form-group {
-    display: flex;
-    align-items: center;
-    justify-content: space-between; 
-    gap: 10px;
-    margin-bottom: 10px; 
-}
-
-.form-group label {
-    width: 140px; 
-    font-weight: bold;
-    color: #333;
-    font-size: 14px;
-}
-
 .form-group select,
 .form-group input {
     flex: 1; 
     padding: 8px;
     font-size: 14px;
-    border: 2px solid #ccc;
+    border: 2px solid #ccc !important;
     border-radius: 4px;
     transition: border-color 0.3s ease;
     box-sizing: border-box;
     background-color: #ffffff;
-    color: #333;
+    color:black;
 }
 
 .form-group select {
@@ -591,16 +490,138 @@ button:focus {
 
 .form-group input {
     width: 50%; 
-    border-left: 2px solid #ccc !important;
 }
 
 .form-group select:hover,
 .form-group input:hover {
-    border-color: #0056b3;
+    border-color: #b1b288;
 }
 
 .form-group select:focus,
 .form-group input:focus {
-    border-color: #003f7f;
+    border-color: #b1b288;
     background-color: #ffffff;
+}
+
+/* animation  */
+/* ----------------------------------------------
+ * Generated by Animista on 2025-2-3 17:8:12
+ * Licensed under FreeBSD License.
+ * See http://animista.net/license for more info. 
+ * w: http://animista.net, t: @cssanimista
+ * ---------------------------------------------- */
+
+/**
+ * ----------------------------------------
+ * animation tracking-in-expand
+ * ----------------------------------------
+ */
+ @-webkit-keyframes tracking-in-expand {
+    0% {
+      letter-spacing: -0.5em;
+      opacity: 0;
+    }
+    40% {
+      opacity: 0.6;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  @keyframes tracking-in-expand {
+    0% {
+      letter-spacing: -0.5em;
+      opacity: 0;
+    }
+    40% {
+      opacity: 0.6;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  
+  .tracking-in-expand {
+	-webkit-animation: tracking-in-expand 3s cubic-bezier(0.215, 0.610, 0.355, 1.000) infinite alternate;;
+	        animation: tracking-in-expand 3s cubic-bezier(0.215, 0.610, 0.355, 1.000) infinite alternate;;
+}
+
+
+/**
+ * ----------------------------------------
+ * animation text-focus-in
+ * ----------------------------------------
+ */
+ @-webkit-keyframes text-focus-in {
+    0% {
+      -webkit-filter: blur(12px);
+              filter: blur(12px);
+      opacity: 0;
+    }
+    100% {
+      -webkit-filter: blur(0px);
+              filter: blur(0px);
+      opacity: 1;
+    }
+  }
+  @keyframes text-focus-in {
+    0% {
+      -webkit-filter: blur(12px);
+              filter: blur(12px);
+      opacity: 0;
+    }
+    100% {
+      -webkit-filter: blur(0px);
+              filter: blur(0px);
+      opacity: 1;
+    }
+  }
+  
+  .text-focus-in {
+	-webkit-animation: text-focus-in 1s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+	        animation: text-focus-in 1s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+}
+
+
+/**
+ * ----------------------------------------
+ * animation scale-in-top
+ * ----------------------------------------
+ */
+ @-webkit-keyframes scale-in-top {
+    0% {
+      -webkit-transform: scale(0);
+              transform: scale(0);
+      -webkit-transform-origin: 50% 0%;
+              transform-origin: 50% 0%;
+      opacity: 1;
+    }
+    100% {
+      -webkit-transform: scale(1);
+              transform: scale(1);
+      -webkit-transform-origin: 50% 0%;
+              transform-origin: 50% 0%;
+      opacity: 1;
+    }
+  }
+  @keyframes scale-in-top {
+    0% {
+      -webkit-transform: scale(0);
+              transform: scale(0);
+      -webkit-transform-origin: 50% 0%;
+              transform-origin: 50% 0%;
+      opacity: 1;
+    }
+    100% {
+      -webkit-transform: scale(1);
+              transform: scale(1);
+      -webkit-transform-origin: 50% 0%;
+              transform-origin: 50% 0%;
+      opacity: 1;
+    }
+  }
+  
+  .scale-in-top {
+	-webkit-animation: scale-in-top 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+	        animation: scale-in-top 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
 }

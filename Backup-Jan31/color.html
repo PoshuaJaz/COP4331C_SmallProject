@@ -7,6 +7,7 @@
 	<meta name="description" content="This is a contact management web application. Easily add, edit, delete, and search contacts.">
 	<script type="text/javascript" src="js/md5.js"></script>
 	<script type="text/javascript" src="js/code.js"></script>
+	<link rel="icon" type="image/x-icon" href="/images/favicon.ico">
 	<link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="css/styles.css">
 	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap" rel="stylesheet">
@@ -18,17 +19,27 @@
 		{
 			readCookie();
 			loadUserContacts() 
+
+			history.replaceState(null, null, location.href);
+			window.addEventListener('popstate', function() {
+				doLogout(); 
+			});
 		}, false);
+
+		window.addEventListener('beforeunload', function() {
+			doLogout();
+		});
+		
 		</script>
 </head>
-<div>
+<body class="color-body">
 	<div class="header">
 		<div id="logoutResult"></div>
-		<span id="userName"></span>
-		<button class="loginbutton" onclick="doLogout()">Logout</button>
+		<button class="logoutbutton" onclick="doLogout()">Logout</button>
 	</div>
 
-	<div class="control-group">
+	<div class="control-group">		
+		<span class="welcome-message text-focus-in"> </span>
 		<button class="addButton" onclick="showAddContactPopup()">ADD</button>
 		<div class="search-box">
 			<input type="text" id="searchFirstName" placeholder="First Name">
@@ -49,7 +60,13 @@
 				</tr>
 			</thead>
 			<tbody>
-				
+				<tr>
+					<td>HE</td>
+					<td>HEE</td>
+					<td>1111</td>
+					<td>YESHI@</td>
+					<td>BUTTON</td>
+				</tr>
 			</tbody>
 		</table>
 	</div>
