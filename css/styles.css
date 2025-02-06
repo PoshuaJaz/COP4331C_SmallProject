@@ -193,68 +193,6 @@ footer a:hover {
     color: black; 
 }
 
-/* search and add */
-/* .control-group {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 15px;
-    padding: 15px;
-    background-color: #f9f9f9;
-    width: 66.66%;
-    box-sizing: border-box;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: -10px;
-}
-
-.welcome-message {
-    font-size: 40px;
-    font-weight: bold;
-    color: #333;
-    margin-right: auto; 
-}
-
-.addButton, .searchButton {
-    display: inline-flex;
-    align-items: center;
-    font-size: 0.8rem;
-    font-weight: bold;
-    padding: 5px 10px;
-    border: 1.5px solid #000;
-    border-radius: 15px;
-    background-color: #fff;
-    color: #000;
-    cursor: pointer;
-    gap: 3px;
-    transition: all 0.3s ease;
-}
-
-.addButton:hover, .searchButton:hover {
-    background-color: #b1b288;
-    color: black;
-}
-
-.addButton::before {
-    content: '+';
-    font-size: 1rem;
-}
-
-.search-box {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    justify-content: flex-end;
-}
-
-.search-box input {
-    padding: 5px;
-    font-size: 0.8rem;
-    border: 1px solid #ccc;
-    border-radius: 15px;
-    width: 120px;
-} */
-
 .container-body {
     display: flex;
     flex-direction: column;
@@ -269,7 +207,7 @@ footer a:hover {
     color: #333;
 }
 
-.button-group {
+.button-group-add-search {
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -291,7 +229,6 @@ footer a:hover {
     cursor: pointer;
     gap: 3px;
     transition: all 0.3s ease;
-    white-space: nowrap; 
 }
 
 .addButton:hover, .searchButton:hover {
@@ -304,7 +241,7 @@ footer a:hover {
     font-size: 1rem;
 }
 
-.button-group input {
+.button-group-add-search input {
     padding: 5px;
     font-size: 0.8rem;
     border: 1px solid #ccc;

@@ -35,11 +35,14 @@
 
 		<div id="messageBox" style="color: rgb(10, 105, 228); margin: 10px 0;"></div>
 
-		<div class="button-group">
+		<div class="button-group-add-search">
 			<button class="addButton" onclick="showAddContactPopup()">ADD</button>
+
 			<input type="text" id="searchFirstName" placeholder="First Name">
 			<input type="text" id="searchLastName" placeholder="Last Name">
-			<button class="searchButton" onclick="searchContacts()">SEARCH</button>
+			<button class="searchButton" onclick="searchContacts()">
+				SEARCH<i class="fas fa-search"></i> 
+			</button>
 		</div>
 
 		<div class="table-container">
