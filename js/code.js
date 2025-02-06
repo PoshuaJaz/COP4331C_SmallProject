@@ -1,4 +1,4 @@
-const urlBase = 'http://menufish.com/LAMPAPI';
+const urlBase = 'https://menufish.com/LAMPAPI';
 const extension = 'php';
 
 let userId = 0;
@@ -104,6 +104,11 @@ function readCookie()
             welcomeMessage.textContent = `Hello, ${firstName}!`;
         }
 	}
+
+    // add
+    window.addEventListener("popstate", function () {
+        doLogout();
+    });
 }
 
 function doLogout()
@@ -123,7 +128,8 @@ function doLogout()
             window.location.href = "index.html";
         }, 1000); 
     } else {
-        window.location.href = "index.html";
+        // window.location.href = "index.html";
+        window.location.replace("index.html");
     }
 }
 
@@ -612,7 +618,7 @@ function validateRegisterInput(firstName, lastName, username, password, confirmP
     }
 
     // Username 
-    const usernameRegex = /^[a-zA-Z]\w{3,18}$/;
+    const usernameRegex = /^[a-zA-Z]\w{2,18}$/;
     if (!usernameRegex.test(username)) {
         displayMessage(messageBox, "Error: Username must start with a letter and contain 3-18 valid characters (letters, numbers, underscores, or hyphens).", "red");
         return false;
