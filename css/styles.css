@@ -45,7 +45,7 @@ body {
     width: 100%;
     max-width: 400px;
     padding: 20px;
-    background-color: #F4F4F4;
+    background-color: #ffffff;
 }
 
 #loginSection input, #registerSection input {
@@ -168,7 +168,7 @@ footer a:hover {
     justify-content: flex-end;
     align-items: center;
     padding: 10px 20px;
-    background: url('/images/banner.png') no-repeat center center;
+    background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), url('/images/banner.png') no-repeat center center;
     background-size: cover;
     gap: 15px;
     height: 50px; 
@@ -189,12 +189,12 @@ footer a:hover {
 }
 
 .logoutbutton:hover {
-    background-color: #000000; 
-    color: #fff; 
+    background-color: #b1b288; 
+    color: black; 
 }
 
 /* search and add */
-.control-group {
+/* .control-group {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -231,8 +231,8 @@ footer a:hover {
 }
 
 .addButton:hover, .searchButton:hover {
-    background-color: #000;
-    color: #fff;
+    background-color: #b1b288;
+    color: black;
 }
 
 .addButton::before {
@@ -253,7 +253,65 @@ footer a:hover {
     border: 1px solid #ccc;
     border-radius: 15px;
     width: 120px;
+} */
+
+.container-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
 }
+
+
+.welcome-message {
+    font-size: 40px;
+    font-weight: bold;
+    color: #333;
+}
+
+.button-group {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+    width: auto; 
+    flex-wrap: nowrap; 
+}
+
+.addButton, .searchButton {
+    display: inline-flex;
+    align-items: center;
+    font-size: 0.8rem;
+    font-weight: bold;
+    padding: 5px 10px;
+    border: 1.5px solid #000;
+    border-radius: 15px;
+    background-color: #fff;
+    color: #000;
+    cursor: pointer;
+    gap: 3px;
+    transition: all 0.3s ease;
+    white-space: nowrap; 
+}
+
+.addButton:hover, .searchButton:hover {
+    background-color: #b1b288;
+    color: black;
+}
+
+.addButton::before {
+    content: '+';
+    font-size: 1rem;
+}
+
+.button-group input {
+    padding: 5px;
+    font-size: 0.8rem;
+    border: 1px solid #ccc;
+    border-radius: 15px;
+    width: 120px;
+}
+
 
 /* table */
 .table-container {
@@ -281,11 +339,11 @@ footer a:hover {
     table-layout: fixed;
     position: sticky;
     top: 0;
-    background-color:#1C1C1C;
+    background-color:#c9c2b8;
     text-align: center;
     height: 50px;
     z-index: 10; 
-    color:white;
+    color:black;
 
 }
 
@@ -542,8 +600,8 @@ footer a:hover {
   }
   
   .tracking-in-expand {
-	-webkit-animation: tracking-in-expand 3s cubic-bezier(0.215, 0.610, 0.355, 1.000) infinite alternate;;
-	        animation: tracking-in-expand 3s cubic-bezier(0.215, 0.610, 0.355, 1.000) infinite alternate;;
+	-webkit-animation: tracking-in-expand 3s cubic-bezier(0.215, 0.610, 0.355, 1.000) 1 forwards;
+	        animation: tracking-in-expand 3s cubic-bezier(0.215, 0.610, 0.355, 1.000) 1 forwards;
 }
 
 

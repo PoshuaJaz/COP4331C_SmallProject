@@ -29,37 +29,41 @@
 		<button class="logoutbutton" onclick="doLogout()">Logout</button>
 	</div>
 
-	<div class="control-group">		
+	<div class="container-body">
+
 		<span class="welcome-message text-focus-in"> </span>
-		<button class="addButton" onclick="showAddContactPopup()">ADD</button>
-		<div class="search-box">
+
+		<div id="messageBox" style="color: rgb(10, 105, 228); margin: 10px 0;"></div>
+
+		<div class="button-group">
+			<button class="addButton" onclick="showAddContactPopup()">ADD</button>
 			<input type="text" id="searchFirstName" placeholder="First Name">
 			<input type="text" id="searchLastName" placeholder="Last Name">
 			<button class="searchButton" onclick="searchContacts()">SEARCH</button>
 		</div>
-	</div>
-	<div id="messageBox" style="color: rgb(10, 105, 228); margin: 10px 0;"></div>
-	<div class="table-container"></div>
-		<table id="contactTable">
-			<thead>
-				<tr>
-					<th>First Name</th>
-					<th>Last Name</th>
-					<th>Phone</th>
-					<th>Email</th>
-					<th>Action</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<td>HE</td>
-					<td>HEE</td>
-					<td>1111</td>
-					<td>YESHI@</td>
-					<td>BUTTON</td>
-				</tr>
-			</tbody>
-		</table>
+
+		<div class="table-container">
+			<table id="contactTable">
+				<thead>
+					<tr>
+						<th>First Name</th>
+						<th>Last Name</th>
+						<th>Phone</th>
+						<th>Email</th>
+						<th>Action</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>HE</td>
+						<td>HEE</td>
+						<td>1111</td>
+						<td>YESHI@</td>
+						<td>BUTTON</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
 	</div>
 
 	<div class="popup addpopup" id="addPopup">
