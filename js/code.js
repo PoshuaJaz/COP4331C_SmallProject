@@ -48,9 +48,9 @@ function doLogin(event)
 
                 displayMessage(loginResult, "Login successful!", "green");
 
-                // window.location.href = "color.html";
                 setTimeout(() => {
                     window.location.href = "color.html";
+
                 }, 1000);
             }
         };
@@ -59,6 +59,7 @@ function doLogin(event)
         displayMessage(loginResult, err.message);
     }
 }
+
 
 function saveCookie()
 {
@@ -97,19 +98,28 @@ function readCookie()
 	}
 	else
 	{
-		// document.getElementById("userName").innerHTML = "Logged in as " + firstName + " " + lastName;
-
         let welcomeMessage = document.querySelector(".welcome-message");
         if (welcomeMessage) {
             welcomeMessage.textContent = `Hello, ${firstName}!`;
         }
 	}
 
-    // add
-    window.addEventListener("popstate", function () {
-        doLogout();
-    });
+    // test: preventing re-login after navigating back and forward
+    // window.addEventListener("popstate", function () {
+    //     doLogout();
+    // });
 }
+
+// test: preventing re-login after navigating back and forward
+// document.addEventListener("DOMContentLoaded", function () {
+//     if (window.location.pathname.includes("index.html")) {
+//         document.cookie = "firstName=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/";
+//         document.cookie = "lastName=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/";
+//         document.cookie = "userId=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/";
+//         localStorage.removeItem("userToken");
+//         sessionStorage.removeItem("userToken");
+//     }
+// });
 
 function doLogout()
 {
@@ -118,6 +128,12 @@ function doLogout()
 	lastName = "";
 	document.cookie = "firstName= ; expires = Thu, 01 Jan 1970 00:00:00 GMT";
 	// window.location.href = "index.html";
+
+    // test: preventing re-login after navigating back and forward
+    // document.cookie = "lastName=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/";
+    // document.cookie = "userId=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/";
+    // localStorage.removeItem("userToken");
+    // sessionStorage.removeItem("userToken");
 
     let logoutResult = document.getElementById("logoutResult");
 
@@ -225,6 +241,18 @@ function closeAddPopup()
 	document.getElementById('overlay').style.display = 'none';
 }
 
+// Show pop-up for easter egg message
+function showEasterEggPopup(message) {
+    document.getElementById("popupMessage").innerText = message;
+    document.getElementById("easterEgg").style.display = "block";
+}
+
+// Close pop-up for easter egg message
+function closeEasterEggPopup() {
+    document.getElementById("easterEgg").style.display = "none";
+}
+
+// add contact 
 function saveNewContact(event) 
 {
     event.preventDefault();
@@ -241,7 +269,6 @@ function saveNewContact(event)
     ) {
         return;
     }
-    console.log("UserID before sending:", userId);
 
     // send data to server
     let tmp = {
@@ -272,7 +299,12 @@ function saveNewContact(event)
                 if (response.error) {
                     displayMessage(addResult,response.error);
                 } else {
-                    displayMessage(addResult, "Registration successful!", "green");
+
+                    if (firstName.toLowerCase() === "rick" && lastName.toLowerCase() === "leinecker") {
+                        showEasterEggPopup("I will not round your 57% up to an A");
+                    } else {
+                        displayMessage(addResult, "Registration successful!", "green");
+                    }
 
                     setTimeout(() => {
                         closeAddPopup();
@@ -287,6 +319,7 @@ function saveNewContact(event)
     xhr.send(jsonPayload);
 }
 
+// view user's saved contacts
 function loadUserContacts() 
 {
     let contactTableBody = document.querySelector("#contactTable tbody");
@@ -480,6 +513,7 @@ function closeEditPopup()
     document.getElementById("editMessage").textContent = "";
 }
 
+// edit selected contact
 function saveEdit(event) 
 {
     event.preventDefault();
@@ -535,6 +569,7 @@ function saveEdit(event)
     xhr.send(jsonPayload);
 }
 
+// delete contact 
 function deleteContact(index) 
 {
 	const contactRow = document.querySelector(`#contactTable tbody tr[data-id="${index}"]`);
@@ -571,14 +606,7 @@ function deleteContact(index)
     xhr.send(jsonPayload);
 }
 
-document.addEventListener("click", (event) => {
-    if (!event.target.matches(".ellipsis-icon") && !event.target.closest(".action-buttons")) {
-        document.querySelectorAll(".action-buttons").forEach(popup => {
-            popup.style.display = "none";
-        });
-    }
-});
-
+// show table evenif user's doesn't have their contact 
 function addEmptyRows(count) {
     let contactTableBody = document.querySelector("#contactTable tbody");
 
@@ -640,7 +668,6 @@ function validateRegisterInput(firstName, lastName, username, password, confirmP
     return true; 
 }
 
-
 // validate for edit 
 function validateInput(field, value,messageBoxId) {
 
@@ -674,6 +701,7 @@ function validateInput(field, value,messageBoxId) {
     return true; 
 }
 
+// show the message 
 function displayMessage(element, message, color = "red") {
     element.textContent = message;
     element.style.color = color;
@@ -696,4 +724,3 @@ function displayMessage(element, message, color = "red") {
         }, 1200);
     }
 }
-

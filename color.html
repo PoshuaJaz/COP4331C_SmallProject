@@ -3,7 +3,6 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<!-- add meta after lighthouse -->
 	<meta name="description" content="This is a contact management web application. Easily add, edit, delete, and search contacts.">
 	<script type="text/javascript" src="js/md5.js"></script>
 	<script type="text/javascript" src="js/code.js"></script>
@@ -20,8 +19,20 @@
 			readCookie();
 			loadUserContacts();
 
+			// test: preventing re-login after navigating back and forward
+			//history.replaceState(null, null, location.href);
+			//window.addEventListener('popstate', function() {
+			//	doLogout(); 
+			//});
+
 		}, false);
-		</script>
+	
+		// test: preventing re-login after navigating back and forward
+		//window.addEventListener('beforeunload', function() {
+		//	doLogout();
+		//});
+
+	</script>
 </head>
 <body class="color-body">
 	<div class="header">
@@ -29,11 +40,9 @@
 		<button class="logoutbutton" onclick="doLogout()">Logout</button>
 	</div>
 
+	<span class="welcome-message text-focus-in"> </span>
 
-
-		<span class="welcome-message text-focus-in"> </span>
-
-		<div id="messageBox" style="color: rgb(10, 105, 228); margin: 10px 0;"></div>
+	<div id="messageBox" style="color: rgb(10, 105, 228); margin: 10px 0;"></div>
 
 	<div class="container-body">
 
@@ -123,7 +132,14 @@
 			</div>
 		</form>
 	</div>
-	
+
+	<div id="easterEgg" class="popup-easter">
+		<div class="popup-content">
+			<span class="close-popup" onclick="closeEasterEggPopup()">&times;</span>
+			<p id="popupMessage"></p>
+		</div>
+	</div>
+		
 	<div class="overlay" id="overlay"></div>
 	<footer>
 		<p>&copy; All Rights Reserved 2025.</p>
